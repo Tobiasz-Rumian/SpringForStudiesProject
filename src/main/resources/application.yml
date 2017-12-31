@@ -1,0 +1,23 @@
+
+spring:
+  thymeleaf:
+    cache: false
+    mode: LEGACYHTML5
+  output:
+    ansi:
+      enabled: always
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+        hibernate:
+            use-new-id-generator-mappings: true
+            hbm2ddl:
+              auto: update
+              import_files_sql_extractor: org.hibernate.tool.hbm2ddl.MultipleLinesSqlCommandExtractor
+  datasource:
+    url: jdbc:mysql://localhost:3306/projekt?autoReconnect=true&useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
