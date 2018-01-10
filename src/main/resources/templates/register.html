@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+<head>
+    <meta charset="UTF-8">
+    <title>Rejestracja</title>
+</head>
+<body background="/css/server.jpeg">
+
+<div class="row" layout:fragment="content">
+    <div class="col s12">
+        <h2 class="black-text center"><b>Dołącz do nas!</b></h2>
+    </div>
+
+    <div class="row">
+        <form class="col s4 offset-s4 blue lighten-4">
+            <p class="center">Dane osobiste</p>
+            <div class="row" id="personal_data">
+                <div class="input-field col s6">
+                    <input id="first_name" type="text" class="validate">
+                    <label for="first_name">Imię</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="last_name" type="text" class="validate">
+                    <label for="last_name">Nazwisko</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="pesel" type="text" class="validate">
+                    <label for="pesel">PESEL</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="telephone" type="text" class="validate">
+                    <label for="telephone">Numer telefonu</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="adress" type="text" class="validate">
+                    <label for="adress">Adres</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="city" type="text" class="validate">
+                    <label for="city">Miasto</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="postal_code" type="text" class="validate">
+                    <label for="postal_code">Kod pocztowy</label>
+                </div>
+            </div>
+            <p class="center">Dane logowania</p>
+            <div class="row" id="login_data">
+                <div class="input-field col s6">
+                    <input id="email" type="text" class="validate">
+                    <label for="email">E-mail</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="password" type="password" class="validate">
+                    <label for="last_name">Hasło</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="repassword" type="password" class="validate">
+                    <label for="repassword">Powtórz hasło</label>
+                </div>
+                <p>
+                    <input type="checkbox" class="filled-in" id="filled-in-box" checked="checked" />
+                    <label for="filled-in-box">Wyrażam zgodę na przetwarzanie moich danych osobowych oraz oświadczam, że zapoznałem się z regulaminem serwisu.</label>
+                </p>
+
+                <div class="center">
+                    <a class="waves-effect waves-light btn-large">Zarejestruj</a>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

@@ -19,8 +19,19 @@ public class MainController {
    public String getLogin() {
       return "login";
    }
+
    @GetMapping("/console")
    public String getCmd() {
       return "console";
+   }
+
+   @GetMapping("/register")
+   public String getRegister() {
+      return "register";
+   }
+
+   @GetMapping("/contact")
+   public String getContact() {
+      return "contact";
    }
 }

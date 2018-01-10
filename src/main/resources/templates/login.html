@@ -1,20 +1,33 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
 <head>
     <title>Spring Security Example </title>
 </head>
 <body>
-<div th:if="${param.error}">
-    Invalid username and password.
+    <div class="row" layout:fragment="content">
+        <div class="col s12">
+            <h2 class="center black-text"><b>Zaloguj</b></h2>
+        </div>
+
+        <form class="col s4 offset-s4 blue lighten-4" th:action="@{/login}" method="post">
+            <p class="center">Dane osobiste</p>
+            <div class="row" id="personal_data">
+                <div class="input-field col s6">
+                    <input id="first_name" type="text" class="validate">
+                    <label for="first_name">E-mail</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="last_name" type="password" class="validate">
+                    <label for="last_name">Hasło</label>
+                </div>
+                <div class="center">
+                    <a class="waves-effect waves-light btn-large">Zaloguj</a>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
-<div th:if="${param.logout}">
-    You have been logged out.
-</div>
-<form th:action="@{/login}" method="post">
-    <div><label> User Name : <input type="text" name="username"/> </label></div>
-    <div><label> Password: <input type="password" name="password"/> </label></div>
-    <div><input type="submit" value="Sign In"/></div>
-</form>
+
 </body>
 </html>
