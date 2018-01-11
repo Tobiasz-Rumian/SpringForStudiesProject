@@ -15,10 +15,10 @@ public class MainController {
       return "home";
    }
 
-   @GetMapping("/login")
-   public String getLogin() {
-      return "login";
-   }
+//   @GetMapping("/login")
+//   public String getLogin() {
+//      return "login";
+//   }
 
    @GetMapping("/console")
    public String getCmd() {
@@ -33,5 +33,15 @@ public class MainController {
    @GetMapping("/contact")
    public String getContact() {
       return "contact";
+   }
+
+   @GetMapping("/user_console")
+   public String getUserConsole() {
+      return "user_main";
+   }
+
+   @GetMapping("/user_offers")
+   public String getUserOffers() {
+      return "user_offers";
    }
 }

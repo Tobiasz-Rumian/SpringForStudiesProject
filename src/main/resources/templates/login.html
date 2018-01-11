@@ -1,10 +1,20 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="layout/default">
+<html
+
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        xmlns:th="http://www.w3.org/1999/xhtml"
+        layout:decorator="layout/default">
 <head>
     <title>Spring Security Example </title>
 </head>
 <body>
+    <ul id="nav-mobile" class="left hide-on-med-and-down blue-text text-darken-2" layout:fragment="nav">
+        <li><a href="/" class="grey-text text-darken-1">Strona główna</a></li>
+        <li><a href="/login" class="grey-text text-darken-1">Zaloguj</a></li>
+        <li><a href="/register" class="grey-text text-darken-1">Zarejestruj</a></li>
+        <li><a href="" class="grey-text text-darken-1">Kontakt</a></li>
+    </ul>
+
     <div class="row" layout:fragment="content">
         <div class="col s12">
             <h2 class="center black-text"><b>Zaloguj</b></h2>
@@ -22,7 +32,7 @@
                     <label for="last_name">Hasło</label>
                 </div>
                 <div class="center">
-                    <a class="waves-effect waves-light btn-large">Zaloguj</a>
+                    <button type="submit" class="waves-effect waves-light btn-large">Zaloguj</button>
                 </div>
             </div>
         </form>

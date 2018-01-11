@@ -33,7 +33,7 @@ public class AuthenticationSuccessHandlerExt implements AuthenticationSuccessHan
             }
          } else if(authority.getAuthority().equals("ROLE_ADMIN")) {
             try {
-               redirectStrategy.sendRedirect(arg0, arg1, "/console");
+               redirectStrategy.sendRedirect(arg0, arg1, "/user_console");
             } catch (Exception e) {
                // TODO Auto-generated catch block
                e.printStackTrace();
