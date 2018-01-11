@@ -35,13 +35,28 @@ public class MainController {
       return "contact";
    }
 
-   @GetMapping("/user_console")
-   public String getUserConsole() {
+   @GetMapping("/user_main")
+   public String getUserMain() {
       return "user_main";
    }
 
    @GetMapping("/user_offers")
    public String getUserOffers() {
       return "user_offers";
+   }
+
+   @GetMapping("/user_wallet")
+   public String getUserWallet() {
+      return "user_wallet";
+   }
+
+   @GetMapping("/user_facture")
+   public String getUserFacture() {
+      return "user_facture";
+   }
+
+   @GetMapping("/user_account")
+   public String getUserAccount() {
+      return "user_account";
    }
 }

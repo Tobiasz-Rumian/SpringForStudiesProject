@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+<head>
+    <meta charset="UTF-8">
+    <title>Ustawienia konta</title>
+</head>
+<body>
+<ul id="nav-mobile" class="left hide-on-med-and-down blue-text text-darken-2" layout:fragment="nav">
+    <li><a href="/user_main" class="grey-text text-darken-1">Strona główna</a></li>
+    <li><a href="/user_offers" class="grey-text text-darken-1">Przeglądaj oferty</a></li>
+    <li><a href="/user_wallet" class="grey-text text-darken-1">Doładuj portfel</a></li>
+    <li><a href="/user_facture" class="grey-text text-darken-1">Przeglądaj faktury</a></li>
+    <li><a href="/user_account" class="grey-text text-darken-1">Ustawienia konta</a></li>
+    <li><a href="" class="grey-text text-darken-1">Wyloguj</a></li>
+</ul>
+<div class="row" layout:fragment="content">
+    <div class="col s12">
+        <h2 class="black-text center"><b>Ustawienia konta</b></h2>
+    </div>
+
+    <div class="col s4 offset-s4 blue lighten-4">
+        <p>
+            W tym miejscu można dokonać cesji - zmienić właściciela umowy. Po zatwierdzeniu zmian, pod wskazany numer telefonu, skontaktuje się nasz konsultant.
+            Dokonane zmiany zostaną zatwierdzone ręcznie przez konsultatnta po potwierdzeniu przez nowego właściciela.
+        </p>
+
+        <form class="row">
+            <div class="input-field col s6">
+                <input id="first_name" type="text" class="validate">
+                <label for="first_name">Imię</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="last_name" type="text" class="validate">
+                <label for="last_name">Nazwisko</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="pesel" type="text" class="validate">
+                <label for="pesel">PESEL</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="telephone" type="text" class="validate">
+                <label for="telephone">Numer telefonu</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="email" type="text" class="validate">
+                <label for="email">E-mail</label>
+            </div>
+            <div class="col s12 center">
+                <button class="btn waves-effect waves-light" type="submit" name="action">Zmień dane
+                    <i class="material-icons right">send</i>
+                </button>
+            </div>
+        </form>
+
+        <p>
+            Zmiany hasła.
+        </p>
+        <form class="row">
+            <div class="input-field col s6">
+                <input id="actual" type="text" class="validate">
+                <label for="actual">Aktualne hasło</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="password" type="text" class="validate">
+                <label for="password">Hasło</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="repassword" type="text" class="validate">
+                <label for="repassword">Powtórz hasło</label>
+            </div>
+            <div class="col s12 center">
+                <button class="btn waves-effect waves-light" type="submit" name="action">zmień hasło
+                    <i class="material-icons right">send</i>
+                </button>
+            </div>
+        </form>
+
+        <p>
+            Aby zlikwidować konto, w pierwszej kolejności muszą Państwo zrezygnować ze wszystkich usług.
+        </p>
+
+        <form class="row">
+            <div class="col s12 center">
+                <button class="btn waves-effect waves-light color red" type="submit" name="action">Opuść nas :(
+                </button>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+</body>
+</html>
