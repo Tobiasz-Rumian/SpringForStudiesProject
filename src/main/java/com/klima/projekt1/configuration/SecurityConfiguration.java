@@ -19,7 +19,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
       auth.inMemoryAuthentication()
               .withUser("user").password("user").roles("USER").and()
-              .withUser("admin").password("admin").roles("USER","ADMIN");
+              .withUser("admin").password("admin").roles("ADMIN");
 
    }
 
@@ -29,7 +29,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
               .authorizeRequests()
               .antMatchers("/","/js/**","/fonts/**","/css/**","/register", "/contact").permitAll()
               .anyRequest().authenticated()
-              .and().formLogin().permitAll()
+              .and().formLogin().permitAll().loginPage("/login").failureUrl("/login_error")
               .and().formLogin().successHandler(successHandler)
               .and().logout().logoutUrl("/").permitAll();
    }
