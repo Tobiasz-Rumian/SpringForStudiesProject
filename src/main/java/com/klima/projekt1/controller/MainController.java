@@ -20,9 +20,9 @@ public class MainController {
 //      return "login";
 //   }
 
-   @GetMapping("/console")
-   public String getCmd() {
-      return "console";
+   @GetMapping("/admin_console")
+   public String getAdminConsole() {
+      return "admin_console";
    }
 
    @GetMapping("/register")
