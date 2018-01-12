@@ -57,9 +57,9 @@ public class MainController {
       return "user_wallet";
    }
 
-   @GetMapping("/user_facture")
-   public String getUserFacture() {
-      return "user_facture";
+   @GetMapping("/user_invoice")
+   public String getUserInvoice() {
+      return "user_invoice";
    }
 
    @GetMapping("/user_account")

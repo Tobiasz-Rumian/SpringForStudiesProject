@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html   lang="pl" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorator="layout/default">
+<html lang="pl" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default" xmlns:th="http://www.w3.org/1999/xhtml">
 <head lang="pl">
     <meta charset="UTF-8"></meta>
     <title>Sudo cmd</title>
@@ -12,14 +12,14 @@
     <li><a href="/user_main" class="grey-text text-darken-1">Strona główna</a></li>
     <li><a href="/user_offers" class="grey-text text-darken-1">Powiadomienia</a></li>
     <li><a href="/user_wallet" class="grey-text text-darken-1">Panel zarządzania ofertami</a></li>
-    <li><a href="/user_facture" class="grey-text text-darken-1">Panel zarządzania kontami użytkowników</a></li>
+    <li><a href="/user_invoice" class="grey-text text-darken-1">Panel zarządzania kontami użytkowników</a></li>
     <li><a href="/user_account" class="grey-text text-darken-1">Ustawienia konta</a></li>
-    <li><a href="" class="grey-text text-darken-1">Wyloguj</a></li>
+    <li><a th:href="@{/logout}" class="grey-text text-darken-1">Wyloguj</a></li>
 </ul>
 
 <div class="row" layout:fragment="content">
     <div class="col s12">
-        <h2 class="black-text center"><b>Witaj IMIĘ</b></h2>
+        <h2 class="black-text center"><b>Witaj Adminie!</b></h2>
     </div>
 
     <div class="col s4 offset-s4 blue lighten-4">

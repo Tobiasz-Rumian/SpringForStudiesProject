@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html
         xmlns:th="http://www.thymeleaf.org"
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html"; charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initialscale =1, maximum-scale=1.0, user-scalable=no"/>
@@ -14,13 +15,18 @@
     <div class="nav-wrapper blue lighten-3">
         <span class="blue-text text-darken 2">
             <a href="/" class="brand-logo right">Logo</a>
-            <section layout:fragment="nav">
+            <ul id="nav-mobile" class="left hide-on-med-and-down blue-text text-darken-2" style="width: 800px">
+                <li><a href="/user_main" class="grey-text text-darken-1" >Strona główna</a></li>
+            <section layout:fragment="nav" >
 
             </section>
+                <li><a sec:authorize="hasRole('ROLE_ADMIN','ROLE_USER')" th:href="@{/logout}" class="grey-text text-darken-1">Wyloguj</a></li>
+            </ul>
         </span>
     </div>
 </nav>
-
+Logged user: <span sec:authentication="name">Bob</span>
+Roles: <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span>
     <section layout:fragment="content">
         <p>X</p>
     </section>
