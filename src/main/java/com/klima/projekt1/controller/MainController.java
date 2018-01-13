@@ -66,4 +66,24 @@ public class MainController {
    public String getUserAccount() {
       return "user_account";
    }
+
+   @GetMapping("/admin_notifications")
+   public String getAdminNotifications() {
+      return "admin_notifications";
+   }
+
+   @GetMapping("/admin_offers")
+   public String getAdminOffers() {
+      return "admin_offers";
+   }
+
+   @GetMapping("/admin_users")
+   public String getAdminUsers() {
+      return "admin_users";
+   }
+
+   @GetMapping("/admin_addOffer")
+   public String getAdminAddOffer() {
+      return "admin_addOffer";
+   }
 }

@@ -15,12 +15,17 @@
     <div class="nav-wrapper blue lighten-3">
         <span class="blue-text text-darken 2">
             <a href="/" class="brand-logo right">Logo</a>
-            <ul id="nav-mobile" class="left hide-on-med-and-down blue-text text-darken-2" style="width: 800px">
-                <li><a href="/user_main" class="grey-text text-darken-1" >Strona główna</a></li>
+            <ul id="nav-mobile" class="left hide-on-med-and-down blue-text text-darken-2" >
+               <!-- <li sec:authorize="hasRole('ROLE_USER')"><a href="/user_main" class="grey-text text-darken-1" >Strona główna</a></li>
+                <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/admin_console" class="grey-text text-darken-1">Strona główna</a></li>
+                <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/admin_notifications" class="grey-text text-darken-1 red lighten-3">Powiadomienia</a></li>
+                <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/admin_offers" class="grey-text text-darken-1">Panel zarządzania ofertami</a></li>
+                <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="" class="grey-text text-darken-1">Panel zarządzania kontami użytkowników</a></li>
+                <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="" class="grey-text text-darken-1">Ustawienia konta</a></li>-->
             <section layout:fragment="nav" >
 
             </section>
-                <li><a sec:authorize="hasRole('ROLE_ADMIN','ROLE_USER')" th:href="@{/logout}" class="grey-text text-darken-1">Wyloguj</a></li>
+                <!--<li sec:authorize="hasRole('ROLE_ADMIN','ROLE_USER')" ><a  th:href="@{/logout}" class="grey-text text-darken-1">Wyloguj</a></li>-->
             </ul>
         </span>
     </div>
