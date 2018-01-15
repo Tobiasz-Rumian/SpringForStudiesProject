@@ -1,5 +1,7 @@
 package com.klima.projekt1.controller;
 
+import com.klima.projekt1.user.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -64,7 +66,6 @@ public class MainController {
         model.addAttribute("user", userService.getUser(id));
         return "user_invoice";
     }
-   }
 
    @GetMapping("/admin_notifications")
    public String getAdminNotifications() {
