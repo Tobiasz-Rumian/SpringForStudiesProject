@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pl" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="layout/default">
+      layout:decorator="layout/default"
+      xmlns:th="http://www.thymeleaf.org">>
 <head>
     <meta charset="UTF-8">
     <title>Rejestracja</title>
@@ -20,20 +21,49 @@
     </div>
 
     <div class="row">
-        <form class="col s4 offset-s4 blue lighten-4">
+        <form class="col s4 offset-s4 blue lighten-4" autocomplete="off" action="#" th:action="@{/register}"
+              th:object="${user}" method="post" role="form" data-toggle="validator">
+            <div th:if="${confirmationMessage}" class="alert alert-success" role="alert"
+                 th:text="${confirmationMessage}"></div>
+            <div th:if="${errorMessage}" class="alert alert-danger" role="alert" th:text="${errorMessage}"></div>
+            <div th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"
+                 class="validation-message alert alert-danger" role="alert"></div>
+            <div th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
+                 class="validation-message alert alert-danger" role="alert"></div>
+            <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+                 class="validation-message alert alert-danger" role="alert"></div>
             <p class="center">Dane osobiste</p>
             <div class="row" id="personal_data">
                 <div class="input-field col s6">
-                    <input id="first_name" type="text" class="validate">
-                    <label for="first_name">Imię</label>
+                    <label th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="validation-message"></label>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-user"></span>
+                    </span>
+                    <input type="text" th:field="*{firstName}" placeholder="First Name" class="form-control" required/>
+                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                 </div>
                 <div class="input-field col s6">
-                    <input id="last_name" type="text" class="validate">
-                    <label for="last_name">Nazwisko</label>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-user"></span>
+                    </span>
+                    <input type="text" th:field="*{lastName}" placeholder="Last Name" class="form-control" required/>
+                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                 </div>
                 <div class="input-field col s6">
-                    <input id="pesel" type="text" class="validate">
-                    <label for="pesel">PESEL</label>
+                    <label th:if="${#fields.hasErrors('role')}" th:errors="*{role}" class="validation-message"></label>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-user"></span>
+                    </span>
+                    <input type="text" th:field="*{role}" placeholder="Role" class="form-control" required/>
+                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                </div>
+                <div class="input-field col s6">
+                    <label th:if="${#fields.hasErrors('pesel')}" th:errors="*{pesel}" class="validation-message"></label>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-user"></span>
+                    </span>
+                    <input type="text" th:field="*{pesel}" placeholder="Pesel" class="form-control" required/>
+                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                 </div>
                 <div class="input-field col s6">
                     <input id="telephone" type="text" class="validate">
@@ -55,22 +85,36 @@
             <p class="center">Dane logowania</p>
             <div class="row" id="login_data">
                 <div class="input-field col s6">
-                    <input id="email" type="text" class="validate">
-                    <label for="email">E-mail</label>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-envelope"></span>
+                    </span>
+                    <input type="email" th:field="*{email}" placeholder="Email Address" class="form-control" data-error="This email address is invalid" required/>
+                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                 </div>
                 <div class="input-field col s6">
-                    <input id="password" type="password" class="validate">
-                    <label for="last_name">Hasło</label>
+                    <span class="input-group-addon">
+                         <span class="glyphicon glyphicon-lock"></span>
+                    </span>
+                    <input name="password" type="password" id="password" placeholder="Password" class="form-control" required />
+                    <span class="glyphicon" aria-hidden="true"></span>
                 </div>
                 <div class="input-field col s6">
-                    <input id="repassword" type="password" class="validate">
-                    <label for="repassword">Powtórz hasło</label>
+                     <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-lock"></span>
+                     </span>
+                    <input type="password" class="form-control" id="signup-password-confirm" placeholder="Confirm Password" name="ConfirmPassword" data-fv-notempty="true"
+                           data-fv-notempty-message="Please confirm password"
+                           data-fv-identical="true"
+                           data-fv-identical-field="password"
+                           data-fv-identical-message="Both passwords must be identical" />
+                    <div class="help-block with-errors"></div>
                 </div>
                 <p>
-                    <input type="checkbox" class="filled-in" id="filled-in-box" checked="checked" />
-                    <label for="filled-in-box">Wyrażam zgodę na przetwarzanie moich danych osobowych oraz oświadczam, że zapoznałem się z regulaminem serwisu.</label>
+                    <input type="checkbox" class="filled-in" id="filled-in-box" checked="checked"/>
+                    <label for="filled-in-box">Wyrażam zgodę na przetwarzanie moich danych osobowych oraz oświadczam, że
+                        zapoznałem się z regulaminem serwisu.</label>
                 </p>
-
+                <div th:></div>
                 <div class="center">
                     <button class="btn waves-effect waves-light" type="submit" name="action">Zarejestruj się
                         <i class="material-icons right">send</i>
@@ -81,6 +125,92 @@
         </form>
     </div>
 </div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
+<!-- Bootstrap -->
+<script
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+
+<!-- Bootstrap Validator plugin -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
+
+<!-- Bootstrap Validator plugin -->
+<script
+        src="//cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.4.2/zxcvbn.js"></script>
+
+<script th:src="@{js/fv.min.js}"></script>
+<script>
+    $(document).ready(function() {
+        $('#passwordForm').formValidation({
+            framework: 'bootstrap',
+            icon: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+
+                password: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The password is required'
+                        },
+                        callback: {
+                            callback: function(value, validator, $field) {
+                                var password = $field.val();
+                                if (password == '') {
+                                    return true;
+                                }
+
+                                var result  = zxcvbn(password),
+                                    score   = result.score,
+                                    message = result.feedback.warning || 'The password is weak';
+
+                                // Update the progress bar width and add alert class
+                                var $bar = $('#strengthBar');
+                                switch (score) {
+                                    case 0:
+                                        $bar.attr('class', 'progress-bar progress-bar-danger')
+                                            .css('width', '1%');
+                                        break;
+                                    case 1:
+                                        $bar.attr('class', 'progress-bar progress-bar-danger')
+                                            .css('width', '25%');
+                                        break;
+                                    case 2:
+                                        $bar.attr('class', 'progress-bar progress-bar-danger')
+                                            .css('width', '50%');
+                                        break;
+                                    case 3:
+                                        $bar.attr('class', 'progress-bar progress-bar-warning')
+                                            .css('width', '75%');
+                                        break;
+                                    case 4:
+                                        $bar.attr('class', 'progress-bar progress-bar-success')
+                                            .css('width', '100%');
+                                        break;
+                                }
+
+                                // We will treat the password as an invalid one if the score is less than 3
+                                if (score < 3) {
+                                    return {
+                                        valid: false,
+                                        message: message
+                                    }
+                                }
+
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    });
+</script>
 </body>
 </html>

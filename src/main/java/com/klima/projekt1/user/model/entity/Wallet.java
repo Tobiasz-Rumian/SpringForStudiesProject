@@ -12,5 +12,5 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @Embeddable
 public class Wallet {
-   private BigDecimal money;
+    private BigDecimal money;
 }

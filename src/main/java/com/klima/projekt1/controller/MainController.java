@@ -1,69 +1,75 @@
 package com.klima.projekt1.controller;
 
+import com.klima.projekt1.user.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import javax.websocket.server.PathParam;
+
 @Controller
 public class MainController {
-   @GetMapping("/")
-   public String getIndex() {
-      return "index";
-   }
+    private UserService userService;
 
-   @GetMapping("/home")
-   public String getHome() {
-      return "home";
-   }
+    @Autowired
+    public MainController(UserService userService) {
+        this.userService = userService;
+    }
 
-   @GetMapping("/login")
-   public String getLogin() {
-      return "login";
-   }
+    @GetMapping("/")
+    public String getIndex(Model model) {
+        model.addAttribute("user", userService.getUser());
+        return "index";
+    }
 
-   @GetMapping("/login_error")
-   public String loginError(Model model) {
-      model.addAttribute("loginError", true);
-      return "login";
-   }
+    @GetMapping("/index/{id}")
+    public String getIndex(@PathParam("id") long id, Model model) {
+        model.addAttribute("user", userService.getUser(id));
+        return "index";
+    }
 
-   @GetMapping("/admin_console")
-   public String getAdminConsole() {
-      return "admin_console";
-   }
 
-   @GetMapping("/register")
-   public String getRegister() {
-      return "register";
-   }
+    @GetMapping("/admin_console/{id}")
+    public String getAdminConsole(@PathParam("id") long id, Model model) {
+        model.addAttribute("user", userService.getUser(id));
+        return "admin_console";
+    }
 
-   @GetMapping("/contact")
-   public String getContact() {
-      return "contact";
-   }
+    @GetMapping("/contact/{id}")
+    public String getContact(@PathParam("id") long id, Model model) {
+        model.addAttribute("user", userService.getUser(id));
+        return "contact";
+    }
 
-   @GetMapping("/user_main")
-   public String getUserMain() {
-      return "user_main";
-   }
+    @GetMapping("/user_main/{id}")
+    public String getUserMain(@PathParam("id") long id, Model model) {
+        model.addAttribute("user", userService.getUser(id));
+        return "user_main";
+    }
 
-   @GetMapping("/user_offers")
-   public String getUserOffers() {
-      return "user_offers";
-   }
+    @GetMapping("/user_offers/{id}")
+    public String getUserOffers(@PathParam("id") long id, Model model) {
+        model.addAttribute("user", userService.getUser(id));
+        return "user_offers";
+    }
 
-   @GetMapping("/user_wallet")
-   public String getUserWallet() {
-      return "user_wallet";
-   }
+    @GetMapping("/user_wallet/{id}")
+    public String getUserWallet(@PathParam("id") long id, Model model) {
+        model.addAttribute("user", userService.getUser(id));
 
-   @GetMapping("/user_invoice")
-   public String getUserInvoice() {
-      return "user_invoice";
-   }
+        return "user_wallet";
+    }
 
-   @GetMapping("/user_account")
-   public String getUserAccount() {
-      return "user_account";
-   }
+    @GetMapping("/user_invoice/{id}")
+    public String getUserInvoice(@PathParam("id") long id, Model model) {
+        model.addAttribute("user", userService.getUser(id));
+        return "user_invoice";
+    }
+
+    @GetMapping("/user_account/{id}")
+    public String getUserAccount(@PathParam("id") long id, Model model) {
+        model.addAttribute("user", userService.getUser(id));
+        return "user_account";
+    }
 }

@@ -19,24 +19,35 @@
             <p th:if="${loginError}" class="error">Wrong user or password</p>
         </div>
 
-        <form class="col s4 offset-s4 blue lighten-4" th:action="@{/login}" method="post">
+
+
+
+
+        <form class="col s4 offset-s4 blue lighten-4" th:action="@{/login}" method="POST">
             <p class="center">Dane osobiste</p>
-            <div class="row" id="personal_data">
+            <!--<div class="row" id="personal_data">
                 <div class="input-field col s6">
-                    <input type="text" id="username" name="username" autofocus="autofocus" class="validate"/>
-                    <label for="username">E-mail</label>
+                    <input type="text" id="email" name="email" autofocus="autofocus" class="validate"/>
+                    <label for="email">E-mail</label>
                 </div>
                 <div class="input-field col s6">
                     <input type="password" id="password" name="password" class="validate" />
                     <label for="password">Hasło</label>
-                </div>
-                <div class="center">
+                </div>-->
+            <input type="text" id="email" name="email"  th:placeholder="Email"
+                   class="form-control" /> <br/>
+            <input type="password"  th:placeholder="Password"
+                   id="password" name="password" class="form-control" /> <br />
+            <!--<div class="center">
                     <button type="submit" value="Zaloguj" class="waves-effect waves-light btn-large">Zaloguj</button>
                 </div>
+            </div>-->
+
+            <div align="center" th:if="${param.error}">
+                <p style="font-size: 20; color: #FF1C19;">Email or Password invalid, please verify</p>
             </div>
+            <button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit" th:text="Login"></button>
         </form>
     </div>
-</div>
-
 </body>
 </html>

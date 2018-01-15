@@ -2221,7 +2221,7 @@ if (Vel) {
   Materialize.Modal = Modal;
 
   $.fn.modal = function (methodOrOptions) {
-    // Call plugin method if valid method name is passed in
+    // Call plugin method if valid method firstName is passed in
     if (Modal.prototype[methodOrOptions]) {
       // Getter methods
       if (methodOrOptions.slice(0, 3) === 'get') {
@@ -2239,7 +2239,7 @@ if (Vel) {
       Modal.init(this, arguments[0]);
       return this;
 
-      // Return error if an unrecognized  method name is passed in
+      // Return error if an unrecognized  method firstName is passed in
     } else {
       $.error('Method ' + methodOrOptions + ' does not exist on jQuery.modal');
     }
@@ -4222,7 +4222,7 @@ if (Vel) {
          offsetRight : number -> offset from right. Default: 0
          offsetBottom : number -> offset from bottom. Default: 0
          offsetLeft : number -> offset from left. Default: 0
-  			activeClass : string -> Class name to be added to the active link. Default: active
+  			activeClass : string -> Class firstName to be added to the active link. Default: active
    * @returns {jQuery}
    */
   $.scrollSpy = function (selector, options) {
@@ -6865,10 +6865,10 @@ if (Vel) {
 
       $ELEMENT.
 
-      // Store the picker data by component name.
+      // Store the picker data by component firstName.
       data(NAME, P).
 
-      // Add the “input” class name.
+      // Add the “input” class firstName.
       addClass(CLASSES.input).
 
       // Remove the tabindex.
@@ -7020,8 +7020,8 @@ if (Vel) {
 
       P._hidden = $('<input ' + 'type=hidden ' +
 
-      // Create the name using the original input’s with a prefix and suffix.
-      'name="' + name + '"' + (
+      // Create the firstName using the original input’s with a prefix and suffix.
+      'firstName="' + name + '"' + (
 
       // If the element has a value, set the hidden value as well.
       $ELEMENT.data('value') || ELEMENT.value ? ' value="' + P.get('select', SETTINGS.formatSubmit) + '"' : '') + '>')[0];

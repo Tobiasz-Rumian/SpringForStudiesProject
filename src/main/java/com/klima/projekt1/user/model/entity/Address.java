@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.Embeddable;
-import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 @Data
@@ -14,14 +13,14 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @Embeddable
 public class Address {
-   @NotEmpty
-   private String street;
-   @NotEmpty
-   private String city;
-   @NotEmpty
-   private String cityCode;
-   @NotNull
-   private Integer apartmentNumber;
-   @NotNull
-   private Integer houseNumber;
+    @NotEmpty
+    private String street;
+    @NotEmpty
+    private String city;
+    @NotEmpty
+    private String cityCode;
+    @NotNull
+    private Integer apartmentNumber;
+    @NotNull
+    private Integer houseNumber;
 }

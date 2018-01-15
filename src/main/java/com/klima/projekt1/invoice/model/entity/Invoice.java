@@ -21,18 +21,18 @@ import java.time.ZonedDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Invoice {
-   @Id
-   @GeneratedValue
-   private long invoiceNumber;
-   @OneToOne
-   private User owner;
-   @NotNull
-   private BigDecimal price;
-   @NotNull
-   @CreatedDate
-   private ZonedDateTime issueDate;
-   @NotNull
-   private ZonedDateTime paymentDeadline;
-   @NotNull
-   private ZonedDateTime paymentDate;
+    @Id
+    @GeneratedValue
+    private long invoiceNumber;
+    @OneToOne
+    private User owner;
+    @NotNull
+    private BigDecimal price;
+    @NotNull
+    @CreatedDate
+    private ZonedDateTime issueDate;
+    @NotNull
+    private ZonedDateTime paymentDeadline;
+    @NotNull
+    private ZonedDateTime paymentDate;
 }

@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -21,16 +20,16 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Offer {
-   @Id
-   @GeneratedValue
-   private Long id;
+    @Id
+    @GeneratedValue
+    private Long id;
 
-   @OneToOne
-   private User owner;
-   @NotEmpty
-   private String offerName;
-   @NotNull
-   private BigDecimal price;
-   private double downloadSpeed;
-   private double uploadSpeed;
+    @OneToOne
+    private User owner;
+    @NotEmpty
+    private String offerName;
+    @NotNull
+    private BigDecimal price;
+    private double downloadSpeed;
+    private double uploadSpeed;
 }

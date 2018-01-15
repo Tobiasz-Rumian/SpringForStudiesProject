@@ -78,5 +78,8 @@ dependencies {
 	compile group: 'uk.com.robust-it', name: 'cloning', version: "${cloning_version}"
 	compile 'net.sourceforge.nekohtml:nekohtml:1.9.22'
 	compile group: 'org.springframework.boot', name: 'spring-boot-devtools', version: '1.5.9.RELEASE'
+	compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity4', version: '3.0.2.RELEASE'
+	compile group: 'org.springframework.security', name: 'spring-security-taglibs', version: '5.0.0.RELEASE'
+	compile group: 'com.nulab-inc', name: 'zxcvbn', version: '1.2.3'
 
 }
