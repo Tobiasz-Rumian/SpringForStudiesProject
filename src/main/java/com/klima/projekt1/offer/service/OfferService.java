@@ -24,7 +24,10 @@ public class OfferService {
     }
 
     public Offer getOffer(long offerId){
-        return Try.of(()->offerRepository.findOne(offerId)).getOrElseThrow(()->DomainException.of(ErrorCode.OFFER_NOT_FOUND));
+        return offerRepository.findOne(offerId);
+    }
+    public Offer getOfferByName(String offer){
+       return offerRepository.findOfferByName(offer);
     }
     public long getOfferUserCount(long offerId){
        return getOffers().size();
@@ -32,5 +35,9 @@ public class OfferService {
 
     public void saveOffer(Offer offer) {
         offerRepository.save(offer);
+    }
+
+    public void deleteOffer(long offerId) {
+        offerRepository.delete(offerId);
     }
 }
