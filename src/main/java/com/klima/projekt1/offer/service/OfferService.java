@@ -29,4 +29,8 @@ public class OfferService {
     public long getOfferUserCount(long offerId){
        return getOffers().size();
     }
+
+    public void saveOffer(Offer offer) {
+        offerRepository.save(offer);
+    }
 }

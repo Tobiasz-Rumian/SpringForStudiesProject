@@ -62,10 +62,10 @@ public class User {
     private Set<Invoice> invoices;
 
     @NotNull
-    private Role role;
+    private Role role = Role.USER;
 
     @NotNull
     @Column(name = "money")
-    private BigDecimal money;
+    private BigDecimal money = new BigDecimal(0);
 
 }

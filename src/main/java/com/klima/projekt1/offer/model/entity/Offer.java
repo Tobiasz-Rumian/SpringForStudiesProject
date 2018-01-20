@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -34,5 +35,5 @@ public class Offer {
     private double downloadSpeed;
     private double uploadSpeed;
     @OneToMany
-    private List<User> users;
+    private List<User> users= new ArrayList<>();
 }
