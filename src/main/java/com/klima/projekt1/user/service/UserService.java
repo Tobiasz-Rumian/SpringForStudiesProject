@@ -1,5 +1,6 @@
 package com.klima.projekt1.user.service;
 
+import com.klima.projekt1.offer.model.entity.Offer;
 import com.klima.projekt1.user.model.entity.User;
 import com.klima.projekt1.user.model.entity.principal.UserPrincipalExt;
 import com.klima.projekt1.user.repository.UserRepository;
@@ -10,6 +11,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 import static com.klima.projekt1.configuration.ErrorCode.USER_NOT_FOUND;
 import static com.klima.projekt1.exception.DomainException.of;

@@ -8,10 +8,10 @@
 <body>
 <ul id="nav-mobile" class="left hide-on-med-and-down blue-text text-darken-2" layout:fragment="nav">
     <li><a th:href="@{/user_main/{id}(id=${user.id})}" href="/user_main/" class="grey-text text-darken-1">Strona główna</a></li>
-    <li><a href="/user_offers" class="grey-text text-darken-1">Przeglądaj oferty</a></li>
-    <li><a href="/user_wallet" class="grey-text text-darken-1">Doładuj portfel</a></li>
-    <li><a href="/user_facture" class="grey-text text-darken-1">Przeglądaj faktury</a></li>
-    <li><a href="/user_account" class="grey-text text-darken-1">Ustawienia konta</a></li>
+    <li><a th:href="@{/user_offers/{id}(id=${user.id})}" class="grey-text text-darken-1">Przeglądaj oferty</a></li>
+    <li><a th:href="@{/user_wallet/{id}(id=${user.id})}" class="grey-text text-darken-1">Doładuj portfel</a></li>
+    <li><a th:href="@{/user_facture/{id}(id=${user.id})}" class="grey-text text-darken-1">Przeglądaj faktury</a></li>
+    <li><a th:href="@{/user_account/{id}(id=${user.id})}" class="grey-text text-darken-1">Ustawienia konta</a></li>
     <li><a href="/logout" class="grey-text text-darken-1">Wyloguj</a></li>
 </ul>
 <div class="row" layout:fragment="content">
@@ -35,7 +35,7 @@
 
         <div class="row">
             <div class="col s6"><p class="left-align">W Twoim portfelu znajduje się: </p></div>
-            <div class="col s3"><p class="right-align"><b>KWOTA PLN</b></p></div>
+            <div class="col s3"><p class="right-align" th:text="${user.money}"><b>KWOTA PLN</b></p></div>
             <div class="col s3">
                 <a class="waves-effect waves-light btn right-align" href="/user_wallet">Doładuj</a>
             </div>
