@@ -12,5 +12,7 @@ public class DatabaseRestrictions {
     public static final int ROLE_NAME_MAX_LENGTH = 50;
     public static final int USER_UUID_MAX_LENGTH = 35;
     public static final int PESEL_MAX_LENGTH = 11;
+    public static final int PHONE_NUMBER_MAX_LENGTH = 9;
+
 
 }

@@ -26,94 +26,103 @@
             <div th:if="${confirmationMessage}" class="alert alert-success" role="alert"
                  th:text="${confirmationMessage}"></div>
             <div th:if="${errorMessage}" class="alert alert-danger" role="alert" th:text="${errorMessage}"></div>
-            <div th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"
-                 class="validation-message alert alert-danger" role="alert"></div>
-            <div th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
-                 class="validation-message alert alert-danger" role="alert"></div>
-            <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
-                 class="validation-message alert alert-danger" role="alert"></div>
             <p class="center">Dane osobiste</p>
             <div class="row" id="personal_data">
+                <!--firstName-->
                 <div class="input-field col s6">
-                    <label th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="validation-message"></label>
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-user"></span>
-                    </span>
-                    <input type="text" th:field="*{firstName}" placeholder="First Name" class="form-control" required/>
-                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                    <label for="firstName">Imię</label>
+                    <input id="firstName" type="text" th:field="*{firstName}" class="validate"/>
+                    <div th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"
+                         class="validation-message alert alert-danger" role="alert"></div>
                 </div>
+                <!--lastName-->
                 <div class="input-field col s6">
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-user"></span>
-                    </span>
-                    <input type="text" th:field="*{lastName}" placeholder="Last Name" class="form-control" required/>
-                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                    <label for="lastName">Nazwisko</label>
+                    <input id="lastName" type="text" th:field="*{lastName}" class="validate"/>
+                    <div th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
+                         class="validation-message alert alert-danger" role="alert"></div>
                 </div>
+                <!--pesel-->
                 <div class="input-field col s6">
-                    <label th:if="${#fields.hasErrors('role')}" th:errors="*{role}" class="validation-message"></label>
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-user"></span>
-                    </span>
-                    <input type="text" th:field="*{role}" placeholder="Role" class="form-control" required/>
-                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                    <label for="pesel">Pesel</label>
+                    <input id="pesel" type="number" th:field="*{pesel}" class="validate"/>
+                    <div th:if="${#fields.hasErrors('pesel')}" th:errors="*{pesel}"
+                         class="validation-message alert alert-danger" role="alert"></div>
                 </div>
+                <!--phoneNumber-->
                 <div class="input-field col s6">
-                    <label th:if="${#fields.hasErrors('pesel')}" th:errors="*{pesel}" class="validation-message"></label>
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-user"></span>
-                    </span>
-                    <input type="text" th:field="*{pesel}" placeholder="Pesel" class="form-control" required/>
-                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                    <label for="phoneNumber">Numer telefonu</label>
+                    <input id="phoneNumber" type="tel" th:field="*{address.phoneNumber}" class="validate"/>
+                    <div th:if="${#fields.hasErrors('address.phoneNumber')}" th:errors="*{address.phoneNumber}"
+                         class="validation-message alert alert-danger" role="alert"></div>
                 </div>
+                <!--street-->
                 <div class="input-field col s6">
-                    <input id="telephone" type="text" class="validate">
-                    <label for="telephone">Numer telefonu</label>
+                    <label for="street">Ulica</label>
+                    <input id="street" type="text" th:field="*{address.street}" class="validate"/>
+                    <div th:if="${#fields.hasErrors('address.street')}" th:errors="*{address.street}"
+                         class="validation-message alert alert-danger" role="alert"></div>
                 </div>
+                <!--city-->
                 <div class="input-field col s6">
-                    <input id="adress" type="text" class="validate">
-                    <label for="adress">Adres</label>
-                </div>
-                <div class="input-field col s6">
-                    <input id="city" type="text" class="validate">
                     <label for="city">Miasto</label>
+                    <input id="city" type="text" th:field="*{address.city}" class="validate"/>
+                    <div th:if="${#fields.hasErrors('address.city')}" th:errors="*{address.city}"
+                         class="validation-message alert alert-danger" role="alert"></div>
                 </div>
+                <!--cityCode-->
                 <div class="input-field col s6">
-                    <input id="postal_code" type="text" class="validate">
-                    <label for="postal_code">Kod pocztowy</label>
+                    <label for="cityCode">Kod pocztowy (Zachowaj format NN-NNN)</label>
+                    <input id="cityCode" type="text" th:field="*{address.cityCode}" class="validate"/>
+                    <div th:if="${#fields.hasErrors('address.cityCode')}" th:errors="*{address.cityCode}"
+                         class="validation-message alert alert-danger" role="alert"></div>
                 </div>
+                <!--houseNumber-->
+                <div class="input-field col s6">
+                    <label for="houseNumber">Numer domu</label>
+                    <input id="houseNumber" type="text" th:field="*{address.houseNumber}" class="validate"/>
+                    <div th:if="${#fields.hasErrors('address.houseNumber')}" th:errors="*{address.houseNumber}"
+                         class="validation-message alert alert-danger" role="alert"></div>
+                </div>
+                <!--apartmentNumber-->
+                <div class="input-field col s6">
+                    <label for="apartmentNumber">Numer mieszkania</label>
+                    <input id="apartmentNumber" type="text" th:field="*{address.apartmentNumber}" class="validate"/>
+                    <div th:if="${#fields.hasErrors('address.apartmentNumber')}" th:errors="*{address.apartmentNumber}"
+                         class="validation-message alert alert-danger" role="alert"></div>
+                </div>
+
             </div>
             <p class="center">Dane logowania</p>
             <div class="row" id="login_data">
+                <!--email-->
                 <div class="input-field col s6">
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-envelope"></span>
-                    </span>
-                    <input type="email" th:field="*{email}" placeholder="Email Address" class="form-control" data-error="This email address is invalid" required/>
-                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                    <label for="email">Adres Email</label>
+                    <input id="email" type="email" th:field="*{email}" class="validate"/>
+                    <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+                         class="validation-message alert alert-danger" role="alert"></div>
                 </div>
+                <!--password-->
                 <div class="input-field col s6">
-                    <span class="input-group-addon">
-                         <span class="glyphicon glyphicon-lock"></span>
-                    </span>
-                    <input name="password" type="password" id="password" placeholder="Password" class="form-control" required />
-                    <span class="glyphicon" aria-hidden="true"></span>
+                    <label for="password">Hasło</label>
+                    <input id="password" type="password" th:field="*{password}" class="validate"/>
+                    <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+                         class="validation-message alert alert-danger" role="alert"></div>
                 </div>
+                <!--rePassword-->
                 <div class="input-field col s6">
-                     <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-lock"></span>
-                     </span>
-                    <input type="password" class="form-control" id="signup-password-confirm" placeholder="Confirm Password" name="ConfirmPassword" data-fv-notempty="true"
-                           data-fv-notempty-message="Please confirm password"
-                           data-fv-identical="true"
-                           data-fv-identical-field="password"
-                           data-fv-identical-message="Both passwords must be identical" />
-                    <div class="help-block with-errors"></div>
+                    <label for="rePassword">Powtórz hasło</label>
+                    <input id="rePassword" type="password" class="validate"/>
                 </div>
-                <p>
-                    <input type="checkbox" class="filled-in" id="filled-in-box" checked="checked"/>
-                    <label for="filled-in-box">Wyrażam zgodę na przetwarzanie moich danych osobowych oraz oświadczam, że
-                        zapoznałem się z regulaminem serwisu.</label>
-                </p>
+                    <p>
+                        <input type="checkbox" class="filled-in" id="agree" data-error=".errorTxt13"/>
+                        <label for="agree">Wyrażam zgodę na przetwarzanie moich danych osobowych, oraz oświadczam, że zapoznałem się z regulaminem serwisu.</label>
+                    </p>
+                <div class="input-field">
+                    <div class="errorTxt13"></div>
+                </div>
+                </div>
+
                 <div th:></div>
                 <div class="center">
                     <button class="btn waves-effect waves-light" type="submit" name="action">Zarejestruj się
@@ -126,6 +135,9 @@
     </div>
 </div>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript" src="js/plugins/chartist-js/chartist.min.js"></script>
+<script type="text/javascript" src="js/plugins/jquery-validation/jquery.validate.min.js"></script>
+<script type="text/javascript" src="js/plugins/jquery-validation/additional-methods.min.js"></script>
 
 <!-- Bootstrap -->
 <script
@@ -144,7 +156,7 @@
 
 <script th:src="@{js/fv.min.js}"></script>
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('#passwordForm').formValidation({
             framework: 'bootstrap',
             icon: {
@@ -160,14 +172,14 @@
                             message: 'The password is required'
                         },
                         callback: {
-                            callback: function(value, validator, $field) {
+                            callback: function (value, validator, $field) {
                                 var password = $field.val();
                                 if (password == '') {
                                     return true;
                                 }
 
-                                var result  = zxcvbn(password),
-                                    score   = result.score,
+                                var result = zxcvbn(password),
+                                    score = result.score,
                                     message = result.feedback.warning || 'The password is weak';
 
                                 // Update the progress bar width and add alert class

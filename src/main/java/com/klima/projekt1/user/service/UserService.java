@@ -23,8 +23,8 @@ public class UserService implements UserDetailsService {
         this.userRepository = userRepository;
     }
 
-    private User getUserByPesel(long pesel) {
-        return userRepository.findOneByPesel(pesel).orElseThrow(() -> of(USER_NOT_FOUND));
+    private User getUserById(long id) {
+        return userRepository.findOneById(id).orElseThrow(() -> of(USER_NOT_FOUND));
     }
 
     public User getUserByEmail(String email) {
@@ -36,7 +36,7 @@ public class UserService implements UserDetailsService {
     }
 
     public User getUser(Long id) {
-        return getUserByPesel(id);
+        return getUserById(id);
     }
 
     public User getUser() {
@@ -50,7 +50,7 @@ public class UserService implements UserDetailsService {
         return new UserPrincipalExt(user);
     }
 
-    public void saveUser(User user) {
+    public void saveUser(User user){
         userRepository.save(user);
     }
 }

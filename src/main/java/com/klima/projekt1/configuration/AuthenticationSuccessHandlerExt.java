@@ -29,14 +29,14 @@ public class AuthenticationSuccessHandlerExt implements AuthenticationSuccessHan
     @Override
     public void onAuthenticationSuccess(HttpServletRequest arg0, HttpServletResponse arg1, Authentication authentication)
             throws IOException, ServletException {
-        long pesel = userService.getUserByEmail(authentication.getName()).getPesel();
+        long id = userService.getUserByEmail(authentication.getName()).getId();
         try {
             switch (new ArrayList<>(authentication.getAuthorities()).get(0).getAuthority()) {
                 case "USER":
-                    redirectStrategy.sendRedirect(arg0, arg1, "/home/" + pesel);//TODO: delete unnecesery database call
+                    redirectStrategy.sendRedirect(arg0, arg1, "/user_main/" + id);//TODO: delete unnecesery database call
                     break;
                 case "ADMIN":
-                    redirectStrategy.sendRedirect(arg0, arg1, "/admin_console/" + pesel);
+                    redirectStrategy.sendRedirect(arg0, arg1, "/admin_console/" + id);
                     break;
                 default:
                     throw new IllegalStateException();

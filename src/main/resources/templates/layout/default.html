@@ -4,33 +4,27 @@
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
         xmlns:sec="http://www.springframework.org/security/tags">
 <head>
-    <meta http-equiv="Content-Type" content="text/html"; charset="UTF-8"/>
+    <meta http-equiv="Content-Type" content="text/html" ; charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initialscale =1, maximum-scale=1.0, user-scalable=no"/>
     <title>Title</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="/css/materialize.min.css" media="screen,projection"/>
 </head>
 <body background="/css/server.jpeg">
 <nav>
     <div class="nav-wrapper blue lighten-3">
         <span class="blue-text text-darken 2">
             <a href="/" class="brand-logo right">Logo</a>
-            <ul th:switch="${user.role}" id="nav-mobile" class="left hide-on-med-and-down blue-text text-darken-2" >
-                <li th:case="'admin'"><a href="/user_main" class="grey-text text-darken-1" >Strona główna</a></li>
-            <section layout:fragment="nav" >
+            <section layout:fragment="nav">
 
             </section>
-                <li th:case="'admin'"><a sec:authorize="hasRole('ROLE_ADMIN','ROLE_USER')" th:href="@{/logout}" class="grey-text text-darken-1">Wyloguj</a></li>
-            </ul>
         </span>
     </div>
 </nav>
-Logged user: <span sec:authentication="firstName">Bob</span>
-Roles: <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span>
-    <section layout:fragment="content">
-        <p>X</p>
-    </section>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="js/materialize.min.js"></script>
+<section layout:fragment="content">
+    <p>X</p>
+</section>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="/js/materialize.min.js"></script>
 </body>
 </html>

@@ -7,11 +7,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.util.Set;
 
 import static com.klima.projekt1.configuration.DatabaseRestrictions.PESEL_MAX_LENGTH;
@@ -25,31 +25,37 @@ import static com.klima.projekt1.configuration.DatabaseRestrictions.PESEL_MAX_LE
 public class User {
     @Id
     @NotNull
+    @Column(unique = true, name = "id")
+    @GeneratedValue()
+    private long id;
+
     @Column(unique = true, length = PESEL_MAX_LENGTH, name = "pesel")
+    @Range(min = 10000000000L, max = 99999999999L, message = "Pesel musi mieć 11 cyfr")
     private long pesel;
-    @NotEmpty
+
+    @NotBlank
     @Column(name = "email", nullable = false, unique = true)
-    @Email(message = "Please provide a valid e-mail")
+    @Email(message = "Błędny email")
     private String email;
 
-
     @Column(name = "first_name")
-    @NotEmpty(message = "Please provide your first firstName")
+    @NotBlank(message = "Wprowadź swoje imie")
     private String firstName;
     @Column(name = "last_name")
-    @NotEmpty(message = "Please provide your last firstName")
+    @NotBlank(message = "Wprowadź swoje nazwisko")
     private String lastName;
+    @NotBlank(message = "To pole jest wymagane")
     @Column(name = "password")
+    @Length(min = 8, message = "Hasło powinno zawierać minimum 8 znaków")
     private String password;
 
     @Column(name = "enabled")
     private boolean enabled;
 
-    private Wallet wallet;
-
+    @OneToOne(cascade=CascadeType.ALL)
     private Address address;
 
-    @OneToOne
+    @ManyToOne
     private Offer offer;
 
     @OneToMany
@@ -57,5 +63,9 @@ public class User {
 
     @NotNull
     private Role role;
+
+    @NotNull
+    @Column(name = "money")
+    private BigDecimal money;
 
 }
