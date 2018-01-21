@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html   lang="pl" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorator="layout/default">
+<html lang="pl" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default"
+      xmlns:th="http://www.w3.org/1999/xhtml">
 <head lang="pl">
     <meta charset="UTF-8"></meta>
     <title>Panel zarządzania użytkownikami</title>
@@ -10,41 +11,16 @@
 <body>
 
 <ul id="nav-mobile" class="left hide-on-med-and-down blue-text text-darken-2" layout:fragment="nav">
-    <li><a href="/admin_console" class="grey-text text-darken-1">Strona główna</a></li>
-    <li><a href="/admin_notifications" class="grey-text text-darken-1 red lighten-3">Powiadomienia</a></li>
-    <li><a href="/admin_offers" class="grey-text text-darken-1">Panel zarządzania ofertami</a></li>
-    <li><a href="/admin_users" class="grey-text text-darken-1">Panel zarządzania kontami użytkowników</a></li>
+    <li><a th:href="@{/admin_console/{id}(id=${user.id})}" class="grey-text text-darken-1">Strona główna</a></li>
+    <li><a th:href="@{/admin_notifications/{id}(id=${user.id})}" class="grey-text text-darken-1 red lighten-3">Powiadomienia</a>
+    </li>
+    <li><a th:href="@{/admin_offers/{id}(id=${user.id})}" class="grey-text text-darken-1">Panel zarządzania ofertami</a>
+    </li>
+    <li><a th:href="@{/admin_users/{id}(id=${user.id})}" class="grey-text text-darken-1">Panel zarządzania kontami
+        użytkowników</a></li>
     <li><a href="" class="grey-text text-darken-1">Ustawienia konta</a></li>
-    <li><a href="" class="grey-text text-darken-1">Wyloguj</a></li>
+    <li><a href="/logout" class="grey-text text-darken-1">Wyloguj</a></li>
 </ul>
-
-<div class="row">
-    <nav class="nav-extended">
-        <div class="nav-wrapper">
-            <a href="#" class="brand-logo">Ljjjjo</a>
-            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="sass.html">Sass</a></li>
-                <li><a href="badges.html">Components</a></li>
-                <li><a href="collapsible.html">JavaScript</a></li>
-            </ul>
-            <ul class="side-nav" id="mobile-demo">
-                <li><a href="sass.html">Sass</a></li>
-                <li><a href="badges.html">Components</a></li>
-                <li><a href="collapsible.html">JavaScript</a></li>
-            </ul>
-        </div>
-        <div class="nav-content">
-            <ul class="tabs tabs-transparent">
-                <li class="tab"><a href="#test1">Test 1</a></li>
-                <li class="tab"><a class="active" href="#test2">Test 2</a></li>
-                <li class="tab disabled"><a href="#test3">Disabled Tab</a></li>
-                <li class="tab"><a href="#test4">Test 4</a></li>
-            </ul>
-        </div>
-    </nav>
-</div>
-
 
 <div class="row" layout:fragment="content">
     <div class="col s12">
@@ -52,75 +28,59 @@
     </div>
 
     <div class="col s4 offset-s4 blue lighten-4">
-        <p>
-            Lista użytkowników systemu. Na czarwono wyróżnieni są użytkownicy zalegający z zapłatą.
-        </p>
+        <p>Lista użytkowników systemu. Na czarwono wyróżnieni są użytkownicy zalegający z zapłatą.</p>
 
         <ul class="collapsible" data-collapsible="accordion">
-            <li>
-                <div class="collapsible-header red lighten-3">Użytkownik #1</div>
+            <li th:each="user : ${users}">
+                <div th:if="${user.haveDebt == true}" class="collapsible-header red lighten-3" th:text="'Użytkownik: '+${user.firstName}+' '+${user.lastName}">Użytkownik #1</div>
+                <div th:if="${user.haveDebt == false}" class="collapsible-header" th:text="'Użytkownik: '+${user.firstName}+' '+${user.lastName}">Użytkownik #1</div>
                 <div class="collapsible-body">
-                    <p>
-                        Użytkownik zalega z zapłatą. Termin zapłaty XXX na kwotę YYY.
-                    </p>
                     <div class="row">
                         <div class="col s6 align-left">
-                            <p>
-                                <b>Nazwa usługi:</b>
-                            </p>
+                            <p><b>Nazwa usługi:</b></p>
                         </div>
                         <div class="col s6 left-align">
-                            <p>
-                                USŁUGA
-                            </p>
+                            <p th:text="${user.offerName}"></p>
                         </div>
-                        <div class="col s6 align-left">
+                        <div class="col s6 left-align">
                             <p>
                                 <b>Imię:</b>
                             </p>
                         </div>
                         <div class="col s6 left-align">
-                            <p>
-                                IMIĘ
-                            </p>
+                            <p th:text="${user.firstName}">  IMIĘ </p>
                         </div>
-                        <div class="col s6 align-left">
+                        <div class=" col s6 align-left">
                             <p>
                                 <b>Nazwisko:</b>
                             </p>
                         </div>
                         <div class="col s6 left-align">
-                            <p>
-                                Nazwisko
-                            </p>
+                            <p th:text="${user.lastName}">  Nazwisko</p>
                         </div>
-                        <div class="col s6 align-left">
+                        <div class=" col s6 align-left">
                             <p>
                                 <b>Numer telefonu:</b>
                             </p>
                         </div>
                         <div class="col s6 left-align">
-                            <p>
-                                NUMER
-                            </p>
+                            <p th:text="${user.phoneNumber}"> NUMER</p>
                         </div>
-                        <div class="col s6 align-left">
+                        <div class=" col s6 align-left">
                             <p>
                                 <b>Adres E-Mail:</b>
                             </p>
                         </div>
                         <div class="col s6 left-align">
-                            <p>
-                                EMAIL
-                            </p>
+                            <p th:text="${user.email}">EMAIL</p>
                         </div>
-                        <div class="col s6 align-left">
+                        <div class=" col s6 align-left">
                             <p>
                                 <b>Adres:</b>
                             </p>
                         </div>
                         <div class="col s6 left-align">
-                            <p>
+                            <p th:text="${user.address}">
                                 Adres
                             </p>
                         </div>
@@ -130,89 +90,7 @@
                             </p>
                         </div>
                         <div class="col s6 left-align">
-                            <p>
-                                PESEL
-                            </p>
-                        </div>
-                    </div>
-                    <div class="row">
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="collapsible-header">Użytkownik #2</div>
-                <div class="collapsible-body">
-                    <p>
-                        Użytkownik płaci w terminie. Termin zapłaty XXX na kwotę YYY.
-                    </p>
-                    <div class="row">
-                        <div class="col s6 align-left">
-                            <p>
-                                <b>Nazwa usługi:</b>
-                            </p>
-                        </div>
-                        <div class="col s6 left-align">
-                            <p>
-                                USŁUGA
-                            </p>
-                        </div>
-                        <div class="col s6 align-left">
-                            <p>
-                                <b>Imię:</b>
-                            </p>
-                        </div>
-                        <div class="col s6 left-align">
-                            <p>
-                                IMIĘ
-                            </p>
-                        </div>
-                        <div class="col s6 align-left">
-                            <p>
-                                <b>Nazwisko:</b>
-                            </p>
-                        </div>
-                        <div class="col s6 left-align">
-                            <p>
-                                Nazwisko
-                            </p>
-                        </div>
-                        <div class="col s6 align-left">
-                            <p>
-                                <b>Numer telefonu:</b>
-                            </p>
-                        </div>
-                        <div class="col s6 left-align">
-                            <p>
-                                NUMER
-                            </p>
-                        </div>
-                        <div class="col s6 align-left">
-                            <p>
-                                <b>Adres E-Mail:</b>
-                            </p>
-                        </div>
-                        <div class="col s6 left-align">
-                            <p>
-                                EMAIL
-                            </p>
-                        </div>
-                        <div class="col s6 align-left">
-                            <p>
-                                <b>Adres:</b>
-                            </p>
-                        </div>
-                        <div class="col s6 left-align">
-                            <p>
-                                Adres
-                            </p>
-                        </div>
-                        <div class="col s6 align-left">
-                            <p>
-                                <b>PESEL:</b>
-                            </p>
-                        </div>
-                        <div class="col s6 left-align">
-                            <p>
+                            <p th:text="${user.pesel}">
                                 PESEL
                             </p>
                         </div>

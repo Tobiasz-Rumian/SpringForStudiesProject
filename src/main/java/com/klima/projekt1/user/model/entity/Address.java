@@ -47,4 +47,11 @@ public class Address {
     @Column(length = PHONE_NUMBER_MAX_LENGTH, name = "phoneNumber")
     private long phoneNumber;
 
+    public String getAddress(){
+        return "Kod pocztowy: " + cityCode +
+                "\n miasto: " + city +
+                "\n ulica: " + street +
+                "\n numer domu: " + houseNumber + "/" + apartmentNumber +
+                "\n tel: " + phoneNumber;
+    }
 }

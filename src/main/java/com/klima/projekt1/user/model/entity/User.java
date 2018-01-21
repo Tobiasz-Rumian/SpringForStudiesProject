@@ -12,6 +12,7 @@ import org.hibernate.validator.constraints.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.time.ZonedDateTime;
 import java.util.Set;
 
 import static com.klima.projekt1.configuration.DatabaseRestrictions.PESEL_MAX_LENGTH;
@@ -55,7 +56,7 @@ public class User {
     @OneToOne(cascade=CascadeType.ALL)
     private Address address;
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL)
     private Offer offer;
 
     @OneToMany
@@ -68,4 +69,6 @@ public class User {
     @Column(name = "money")
     private BigDecimal money = new BigDecimal(0);
 
+    @NotNull
+    private ZonedDateTime payDate =ZonedDateTime.now();
 }

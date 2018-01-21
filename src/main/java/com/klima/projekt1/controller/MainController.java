@@ -75,18 +75,10 @@ public class MainController {
    @GetMapping("/admin_notifications")
    public String getAdminNotifications(@PathVariable("id") long id, Model model) {
        model.addAttribute("user", userService.getUser(id));
-
        return "admin_notifications";
    }
 
 
-
-   @GetMapping("/admin_users/{id}")
-   public String getAdminUsers(@PathVariable("id") long id, Model model) {
-       model.addAttribute("user", userService.getUser(id));
-
-       return "admin_users";
-   }
 
     @GetMapping("/user_account/{id}")
     public String getUserAccount(@PathVariable("id") long id, Model model) {

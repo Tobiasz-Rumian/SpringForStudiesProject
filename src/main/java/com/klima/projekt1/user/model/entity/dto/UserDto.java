@@ -1,19 +1,17 @@
 package com.klima.projekt1.user.model.entity.dto;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 public class UserDto {
-    private String name;
-    private String surname;
-    private long pesel;
+    private String offerName;
+    private String firstName;
+    private String lastName;
     private long phoneNumber;
-    private String street;
-    private int homeNumber;
-    private int apartmentNumber;
-    private String city;
-    private String cityCode;
     private String email;
-    private String password;
-    private boolean declaration;
+    private String address;
+    private long pesel;
+    private boolean haveDebt;
 }

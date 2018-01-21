@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 @Data
-public class OfferDTO {
+public class OfferDto {
     private Long id;
     private String name;
     private String description;
