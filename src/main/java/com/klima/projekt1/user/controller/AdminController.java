@@ -29,6 +29,7 @@ public class AdminController {
     public String getAdminUsers(@PathVariable("id") long id, Model model) {
         model.addAttribute("user", userService.getUser(id));
         model.addAttribute("users", userMapper.toUserDTOs(userService.getUsers()));
+        model.addAttribute("unreadNotificationNumber", notificationService.getNumberOfUnreedUserNotifications(id));
         return "admin_users";
     }
 
@@ -43,6 +44,7 @@ public class AdminController {
     @GetMapping("/admin_notifications/{id}")
     public String getAdminNotifications(@PathVariable("id") long id, Model model) {
         model.addAttribute("user", userService.getUser(id));
+        model.addAttribute("unreadNotificationNumber", notificationService.getNumberOfUnreedUserNotifications(id));
         model.addAttribute("notifications", notificationMapper.toNotificationDtos(notificationService.getAllUnreedNotifications()));
         return "admin_notifications";
     }

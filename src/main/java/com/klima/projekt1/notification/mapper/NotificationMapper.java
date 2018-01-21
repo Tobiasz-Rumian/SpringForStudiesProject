@@ -26,8 +26,8 @@ public class NotificationMapper {
         String offer;
         for (Notification notification : notifications) {
             offer = notification.getNotificationCode().isOfferRelated()
-                    ? ""
-                    : notification.getOwner().getOffer().getName();
+                    ? notification.getOwner().getOffer().getName()
+                    : "";
 
             notificationDtos.add(NotificationDto.builder().user(userMapper.toUserDto(notification.getOwner()))
                     .information(notification.getNotificationCode().getMessage())

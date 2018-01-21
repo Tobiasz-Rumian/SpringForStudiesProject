@@ -29,7 +29,8 @@
                                                               class="grey-text text-darken-1 red lighten-3">Powiadomienia</a></li>
                 <li><a th:href="@{/admin_offers/{id}(id=${user.id})}" class="grey-text text-darken-1">Panel zarządzania ofertami</a></li>
                 <li><a th:href="@{/admin_users/{id}(id=${user.id})}" class="grey-text text-darken-1">Panel zarządzania kontami użytkowników</a></li>
-                <li><a href="" class="grey-text text-darken-1">Ustawienia konta</a></li>
+                <li><a th:href="@{/user_account/{id}(id=${user.id})}"
+                       class="grey-text text-darken-1">Ustawienia konta</a></li>
                 <li>
                     <form class="grey-text text-darken-1" th:action="@{/logout}" method="post" role="form">
                             <div class="center"><button class="grey-text text-darken-1 btn-flat" type="submit"

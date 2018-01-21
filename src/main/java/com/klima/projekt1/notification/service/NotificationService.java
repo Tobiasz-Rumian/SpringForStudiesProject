@@ -1,7 +1,9 @@
 package com.klima.projekt1.notification.service;
 
 import com.klima.projekt1.notification.model.entity.Notification;
+import com.klima.projekt1.notification.model.enums.NotificationCode;
 import com.klima.projekt1.notification.repository.NotificationRepository;
+import com.klima.projekt1.user.model.entity.User;
 import com.klima.projekt1.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,5 +42,13 @@ public class NotificationService {
 
     public long getNumberOfUnreedUserNotifications(long userId) {
         return notificationRepository.countByOwnerIdAndSeenIsFalse(userId);
+    }
+
+    public void addNotification(NotificationCode notificationCode, User user) {
+        notificationRepository.save(Notification.builder()
+                .notificationCode(notificationCode)
+                .owner(user)
+                .seen(false)
+                .build());
     }
 }

@@ -31,8 +31,8 @@ public class RegisterController {
     }
 
     @GetMapping("/register")
-    public String showRegistrationPage(Model model, User user) {
-        model.addAttribute("user", user);
+    public String showRegistrationPage(Model model) {
+        model.addAttribute("user", userService.getUser());
         return "register";
     }
 
@@ -46,7 +46,7 @@ public class RegisterController {
             model.addAttribute("alreadyRegisteredMessage", "Konto dla tego adresu email już istnieje");
             bindingResult.reject("email");
         }
-        if(bindingResult.getErrorCount()>2){
+        if (bindingResult.getErrorCount() > 0) {
             StringBuilder sb = new StringBuilder();
             for (ObjectError e:bindingResult.getAllErrors()) sb.append(e.getObjectName()).append("\n");
             model.addAttribute("errorMessage", sb);

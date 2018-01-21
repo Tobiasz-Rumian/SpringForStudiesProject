@@ -64,4 +64,8 @@ public class UserService implements UserDetailsService {
     public long getNuberOfAllAfterPayDate() {
         return userRepository.countAllByPayDateBefore(ZonedDateTime.now());
     }
+
+    public void deleteUser(User user) {
+        userRepository.delete(user);
+    }
 }
