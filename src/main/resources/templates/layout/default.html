@@ -2,7 +2,7 @@
 <html
         xmlns:th="http://www.thymeleaf.org"
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        xmlns:sec="http://www.springframework.org/security/tags">
+>
 <head>
     <meta http-equiv="Content-Type" content="text/html" ; charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initialscale =1, maximum-scale=1.0, user-scalable=no"/>
@@ -15,6 +15,51 @@
     <div class="nav-wrapper blue lighten-3">
         <span class="blue-text text-darken 2">
             <a href="/" class="brand-logo right">Logo</a>
+            <!--Nav for admin-->
+            <ul th:if="${user.role == T(com.klima.projekt1.user.enums.Role).ADMIN}" id="nav-mobile"
+                class="left hide-on-med-and-down blue-text text-darken-2">
+                <li><a th:href="@{/admin_console/{id}(id=${user.id})}" class="grey-text text-darken-1">Strona główna</a></li>
+                <li th:if="${unreadNotificationNumber ==0}"><a th:href="@{/admin_notifications/{id}(id=${user.id})}"
+                                                               class="grey-text text-darken-1">Powiadomienia</a></li>
+                <li th:if="${unreadNotificationNumber <0}"><a th:href="@{/admin_notifications/{id}(id=${user.id})}"
+                                                              class="grey-text text-darken-1 red lighten-3">Powiadomienia</a></li>
+                <li><a th:href="@{/admin_offers/{id}(id=${user.id})}" class="grey-text text-darken-1">Panel zarządzania ofertami</a></li>
+                <li><a th:href="@{/admin_users/{id}(id=${user.id})}" class="grey-text text-darken-1">Panel zarządzania kontami użytkowników</a></li>
+                <li><a href="" class="grey-text text-darken-1">Ustawienia konta</a></li>
+                <li>
+                    <form class="grey-text text-darken-1" th:action="@{/logout}" method="post" role="form">
+                            <div class="center"><button class="grey-text text-darken-1 btn-flat" type="submit"
+                                                        name="action">Wyloguj</button></div>
+                    </form>
+                </li>
+            </ul>
+            <!--Nav for unlogged-->
+            <ul th:if="${user.role == T(com.klima.projekt1.user.enums.Role).UNLOGGED}" id="nav-mobile"
+                class="left hide-on-med-and-down blue-text text-darken-2">
+                <li><a href="/" class="grey-text text-darken-1">Strona główna</a></li>
+                <li><a href="/login" class="grey-text text-darken-1">Zaloguj</a></li>
+                <li><a href="/register" class="grey-text text-darken-1">Zarejestruj</a></li>
+                <li><a href="" class="grey-text text-darken-1">Kontakt</a></li>
+            </ul>
+            <!--Nav for user-->
+            <ul th:if="${user.role == T(com.klima.projekt1.user.enums.Role).USER}" id="nav-mobile"
+                class="left hide-on-med-and-down blue-text text-darken-2">
+                 <li><a th:href="@{/user_main/{id}(id=${user.id})}"
+                        class="grey-text text-darken-1">Strona główna</a></li>
+                 <li><a th:href="@{/user_offers/{id}(id=${user.id})}"
+                        class="grey-text text-darken-1">Przeglądaj oferty</a></li>
+                 <li><a th:href="@{/user_wallet/{id}(id=${user.id})}"
+                        class="grey-text text-darken-1">Doładuj portfel</a></li>
+                 <li><a th:href="@{/user_facture/{id}(id=${user.id})}" class="grey-text text-darken-1">Przeglądaj faktury</a></li>
+                 <li><a th:href="@{/user_account/{id}(id=${user.id})}"
+                        class="grey-text text-darken-1">Ustawienia konta</a></li>
+                 <li>
+                    <form class="grey-text text-darken-1" th:action="@{/logout}" method="post" role="form">
+                            <div class="center"><button class="grey-text text-darken-1 btn-flat" type="submit"
+                                                        name="action">Wyloguj</button></div>
+                    </form>
+                </li>
+            </ul>
             <section layout:fragment="nav">
 
             </section>

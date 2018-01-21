@@ -9,14 +9,7 @@
     <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection"/>
 </head>
 <body>
-<ul id="nav-mobile" class="left hide-on-med-and-down blue-text text-darken-2" layout:fragment="nav">
-    <li><a th:href="@{/admin_console/{id}(id=${user.id})}"  class="grey-text text-darken-1">Strona główna</a></li>
-    <li><a th:href="@{/admin_notifications/{id}(id=${user.id})}"  class="grey-text text-darken-1 red lighten-3">Powiadomienia</a></li>
-    <li><a th:href="@{/admin_offers/{id}(id=${user.id})}"  class="grey-text text-darken-1">Panel zarządzania ofertami</a></li>
-    <li><a th:href="@{/admin_users/{id}(id=${user.id})}" class="grey-text text-darken-1">Panel zarządzania kontami użytkowników</a></li>
-    <li><a href="" class="grey-text text-darken-1">Ustawienia konta</a></li>
-    <li><a href="/logout" class="grey-text text-darken-1">Wyloguj</a></li>
-</ul>
+
 <div class="row" layout:fragment="content">
     <div class="col s12">
         <h2 class="red-text text-darken-3 center"><b>Jesteś zalogowany jako administrator</b></h2>
@@ -27,7 +20,8 @@
             <div class="col s5"><p class="left-align">Ilość nowych powiadomień: </p></div>
             <div class="col s3"><p class="right-align" th:text="${unreadNotificationNumber}"><b>ILOŚĆ</b></p></div>
             <div class="col s4">
-                <a class="waves-effect waves-light right-align btn">Powiadomienia</a>
+                <a class="waves-effect waves-light right-align btn"
+                   th:href="@{/admin_notifications/{id}(id=${user.id})}">Powiadomienia</a>
             </div>
         </div>
 
@@ -36,7 +30,8 @@
             <div class="col s3" style="vertical-align: middle;"><p class="right-align" th:text="${pastPayDateNumber}">
                 <b>ILOŚĆ</b></p></div>
             <div class="col s4">
-                <a class="waves-effect waves-light btn right-align disabled modal-trigger">Użytkownicy</a>
+                <a class="waves-effect waves-light btn right-align modal-trigger"
+                   th:href="@{/admin_users/{id}(id=${user.id})}">Użytkownicy</a>
             </div>
         </div>
     </div>
