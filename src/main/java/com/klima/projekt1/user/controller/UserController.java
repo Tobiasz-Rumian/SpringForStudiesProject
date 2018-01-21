@@ -2,7 +2,10 @@ package com.klima.projekt1.user.controller;
 
 import com.klima.projekt1.notification.model.enums.NotificationCode;
 import com.klima.projekt1.notification.service.NotificationService;
+import com.klima.projekt1.offer.model.entity.Offer;
+import com.klima.projekt1.offer.service.OfferService;
 import com.klima.projekt1.user.enums.Role;
+import com.klima.projekt1.user.model.dto.MoneyTransferDto;
 import com.klima.projekt1.user.model.entity.User;
 import com.klima.projekt1.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 import java.util.Map;
 
@@ -25,11 +29,13 @@ public class UserController {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
     private UserService userService;
     private NotificationService notificationService;
+    private OfferService offerService;
     @Autowired
-    public UserController(BCryptPasswordEncoder bCryptPasswordEncoder, UserService userService, NotificationService notificationService) {
+    public UserController(BCryptPasswordEncoder bCryptPasswordEncoder, UserService userService, NotificationService notificationService, OfferService offerService) {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.userService = userService;
         this.notificationService = notificationService;
+        this.offerService = offerService;
     }
 
     @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
@@ -76,15 +82,89 @@ public class UserController {
     }
 
     @PostMapping("/user_account_delete/{userId}")
-    public String processDeleteUserForm(@PathVariable("userId") long userId, Model model, BindingResult bindingResult, HttpServletRequest request, @RequestParam Map requestParams, RedirectAttributes redir) {
+    public String processDeleteUserForm(@PathVariable("userId") long userId, Model model) {
         User user = userService.getUser(userId);
-        if (user.getOffer() != null
-                || user.getPayDate().isBefore(ZonedDateTime.now())
-                || user.getRole() == Role.ADMIN) {
-            model.addAttribute("message", "Użytkownik nie może zostać usunięty");
-            return "user_account";
+        if (user.getOffer() == null
+                && (user.getPayDate() == null || !user.getPayDate().isBefore(ZonedDateTime.now()))
+                && user.getRole() != Role.ADMIN) {
+            userService.deleteUser(user);
+            return "/logout";
         }
-        userService.deleteUser(user);
-        return "/logout";
+
+        model.addAttribute("message", "Użytkownik nie może zostać usunięty");
+        return "user_account";
+    }
+
+    @GetMapping("/user_main/{id}")
+    public String getUserMain(@PathVariable("id") long id, Model model) {
+        model.addAttribute("user", userService.getUser(id));
+        User user = userService.getUser(id);
+        BigDecimal leftToPay = new BigDecimal(0);
+        if (user.getOffer() != null && user.getPayDate().isBefore(ZonedDateTime.now()))
+            leftToPay = user.getOffer().getPrice();
+        model.addAttribute("leftToPay", leftToPay);
+        return "user_main";
+    }
+
+    @GetMapping("/user_wallet/{id}")
+    public String getUserWallet(@PathVariable("id") long id, Model model) {
+        model.addAttribute("user", userService.getUser(id));
+        model.addAttribute("amount", new MoneyTransferDto(0));
+        return "user_wallet";
+    }
+
+    @PostMapping("/user_wallet/{userId}")
+    public String processUserWalletForm(@PathVariable("userId") long userId, @Valid MoneyTransferDto amount, Model model) {
+        User user = userService.getUser(userId);
+        if (amount.getAmount() <= 0d) {
+            model.addAttribute("message", "Kwota nie może być mniejsza lub równa 0!");
+            return "error";
+        }
+        user.setMoney(user.getMoney().add(BigDecimal.valueOf(amount.getAmount())));
+        userService.saveUser(user);
+        model.addAttribute("user", user);
+        model.addAttribute("message", "Pomyślnie zwiększono stan konta.");
+        return getUserWallet(userId, model);
+    }
+
+
+    @GetMapping("/user_offers/{id}")
+    public String getUserOffers(@PathVariable("id") long id, Model model) {
+        model.addAttribute("user", userService.getUser(id));
+        model.addAttribute("offers", offerService.getOffers());
+        return "user_offers";
+    }
+
+    @PostMapping("/user_offers/{userId}/{offerId}")
+    public String processUserOffersForm(@PathVariable("userId") long userId, @PathVariable("offerId") long offerId, Model model) {
+        User user = userService.getUser(userId);
+        if (user.getOffer() != null) {
+            model.addAttribute("message", "Posiadasz już ofertę");
+            return "error";
+        }
+        Offer offer = offerService.getOffer(offerId);
+        user.setOffer(offer);
+        user.setPayDate(ZonedDateTime.now().plusMonths(1));
+        userService.saveUser(user);
+        notificationService.addNotification(NotificationCode.USER_CHANGED_PERSONAL_DATA, user);
+        model.addAttribute("user", user);
+        model.addAttribute("offers", offerService.getOffers());
+        return "user_offers";
+    }
+
+    @PostMapping("/user_offers_delete/{userId}")
+    public String processUserOffersDeleteForm(@PathVariable("userId") long userId, Model model) {
+        User user = userService.getUser(userId);
+        if (user.getOffer() == null) {
+            model.addAttribute("message", "Nie posiadasz oferty");
+            return "error";
+        }
+        user.setPayDate(null);
+        user.setOffer(null);
+        userService.saveUser(user);
+        notificationService.addNotification(NotificationCode.USER_RESIGN_FROM_OFFER, user);
+        model.addAttribute("user", user);
+        model.addAttribute("offers", offerService.getOffers());
+        return "user_offers";
     }
 }

@@ -40,25 +40,6 @@ public class MainController {
         return "contact";
     }
 
-    @GetMapping("/user_main/{id}")
-    public String getUserMain(@PathVariable("id") long id, Model model) {
-        model.addAttribute("user", userService.getUser(id));
-        return "user_main";
-    }
-
-    @GetMapping("/user_offers/{id}")
-    public String getUserOffers(@PathVariable("id") long id, Model model) {
-        model.addAttribute("user", userService.getUser(id));
-        return "user_offers";
-    }
-
-    @GetMapping("/user_wallet/{id}")
-    public String getUserWallet(@PathVariable("id") long id, Model model) {
-        model.addAttribute("user", userService.getUser(id));
-
-        return "user_wallet";
-    }
-
     @GetMapping("/user_invoice/{id}")
     public String getUserInvoice(@PathVariable("id") long id, Model model) {
         model.addAttribute("user", userService.getUser(id));

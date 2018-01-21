@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pl" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.w3.org/1999/xhtml"
       layout:decorator="layout/default">
 <head>
     <meta charset="UTF-8">
@@ -15,10 +16,14 @@
         <p>
             Maksymalna kwota jaką mogą Państwo zasilić konto wynosi 200zł.
         </p>
-        <form class="row">
-            <div class="input-field row">
-                <input id="pesel" type="text" class="validate">
-                <label for="pesel">Kwota</label>
+        <form class="col s6 blue lighten-4" autocomplete="off" action="#"
+              th:action="@{/user_wallet/{id}(id=${user.id})}"
+              th:object="${amount}" method="post" role="form" data-toggle="validator">
+            <div class="input-field col s6">
+                <label for="amount">Kwota</label>
+                <input id="amount" type="text" th:field="*{amount}" th:value="${amount}" class="validate"/>
+                <div th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}"
+                     class="validation-message alert alert-danger" role="alert"></div>
             </div>
             <div class="center">
                 <button class="btn waves-effect waves-light" type="submit" name="action">Doładuj

@@ -56,6 +56,7 @@ public class RegisterController {
         user.setEnabled(true);
         userService.saveUser(user);
         model.addAttribute("successMessage", "Your password has been set!");
+        model.addAttribute("user", userService.getUser());
         return "register";
     }
 

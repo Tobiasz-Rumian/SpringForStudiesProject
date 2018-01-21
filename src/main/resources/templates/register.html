@@ -175,14 +175,8 @@
                 var password = document.getElementById("password").value;
                 var rePassword = document.getElementById("rePassword").value;
                 var cityCode = document.getElementById("cityCode").value;
-                alert("peselL: " + pesel.lenght)
 
-                if(pesel.length != 11)
-                {
-                    alert("Dlugość numeru PESEL powinna wynosić 11. Ty podałeś: " + pesel.length);
-                    return false;
-                }
-                else if(phoneNumber.length != 9)
+                if (phoneNumber.length != 9)
                 {
                     alert("Dlugość numeru telefonu powinna wynosić 9 znaków. Ty podałeś: " + phoneNumber.length);
                     return false;

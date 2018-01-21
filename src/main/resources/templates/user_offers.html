@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pl" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout/default"
->
+      xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Oferty</title>
@@ -13,16 +13,19 @@
     </div>
 
     <div class="col s4 offset-s4 blue lighten-4">
-        <p>Poniżej widnieją Państwa aktualne usługi.</p>
-        <ul class="collapsible" data-collapsible="accordion">
+
+        <ul th:if="${user.offer!=null}" class="collapsible" data-collapsible="accordion">
+            <p>Poniżej widnieją Państwa aktualne usługi.</p>
             <li>
-                <div class="collapsible-header">OFERTA #1</div>
+                <div class="collapsible-header" th:text="${user.offer.name}">OFERTA #1</div>
                 <div class="collapsible-body">
-                    <span>OPIS OFERTY</span>
+                    <span th:text="${user.offer.description}">OPIS OFERTY</span>
                     <div class="row">
-                        <form class="row">
+                        <form class="col s6 blue lighten-4" th:action="@{/user_offers_delete/{id}/(id=${user.id})}"
+                              method="post" role="form">
                             <div class="center">
-                                <button class="btn waves-effect waves-light" type="submit" name="action">Zrezygnuj
+                                <button class="waves-effect waves-light btn-large center-align" type="submit"
+                                        name="action">Zrezygnuj
                                     <i class="material-icons right">send</i>
                                 </button>
                             </div>
@@ -34,13 +37,15 @@
 
         <p>Poniżej przedstawiamy naszą ofertę. Aby zobaczyć szczegły oferty proszę kliknąć interesujące Państwa pole z nazwą usługi.
         W celu wybrania oferty kliknij przecisk ZAPISZ widoczny w polu ukazywanym po wybraniu usługi.
-        Nasz konsultant skontaktuje się z Państwem w celu ustalenia terminu montażu internetu przez naszego technika oraz podpisania umowy. ( ͡° ͜ʖ ͡°)</p>
+            Nasz konsultant skontaktuje się z Państwem w celu ustalenia terminu montażu internetu przez naszego technika
+            oraz podpisania umowy.</p>
 
         <ul class="collapsible" data-collapsible="accordion">
-            <li>
-                <div class="collapsible-header">OFERTA #1</div>
+            <li th:each="offer : ${offers}">
+                <div class="collapsible-header" th:text="${offer.name}">OFERTA #1</div>
                 <div class="collapsible-body">
-                    <div class="row">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    <div class="row" th:text="${offer.description}">Lorem ipsum dolor sit amet, consectetur adipiscing
+                        elit.
                     Nam nec aliquam ipsum, vitae faucibus odio. Mauris euismod mi ligula, non gravida lectus efficitur id.
                     Sed sed dapibus mi, vel volutpat lorem. Proin vel tempor metus.
                     Ut arcu nisi, vehicula sit amet tellus nec, lobortis elementum ipsum.
@@ -57,93 +62,20 @@
                             </thead>
                             <tbody>
                             <tr>
-                                <td>PRĘDKOŚĆ POBIERNAIA</td>
-                                <td>PRĘDKOŚĆ WYSYŁANIA</td>
-                                <td>CENA</td>
+                                <td th:text="${offer.downloadSpeed}">PRĘDKOŚĆ POBIERNAIA</td>
+                                <td th:text="${offer.uploadSpeed}">PRĘDKOŚĆ WYSYŁANIA</td>
+                                <td th:text="${offer.price}">CENA</td>
                             </tr>
                             </tbody>
                         </table>
                     </div>
                     <div class="row">
-                        <form class="row">
+                        <form class="col s6 blue lighten-4"
+                              th:action="@{/user_offers/{id}/{offerId}(id=${user.id},offerId=${offer.id})}"
+                              method="post" role="form">
                             <div class="center">
-                                <button class="btn waves-effect waves-light" type="submit" name="action">Wybierz!
-                                    <i class="material-icons right">send</i>
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="collapsible-header">OFERTA #2</div>
-                <div class="collapsible-body">
-                    <div class="row">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Nam nec aliquam ipsum, vitae faucibus odio. Mauris euismod mi ligula, non gravida lectus efficitur id.
-                    Sed sed dapibus mi, vel volutpat lorem. Proin vel tempor metus.
-                    Ut arcu nisi, vehicula sit amet tellus nec, lobortis elementum ipsum.
-                    Nullam eu pretium ligula. Nunc eu luctus lorem, ut fringilla odio.
-                    </div>
-                    <div class="row">
-                        <table class="centered">
-                            <thead>
-                            <tr>
-                                <th>Prędkość pobierania</th>
-                                <th>Prędkość wysyłania</th>
-                                <th>Cena</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>PRĘDKOŚĆ POBIERNAIA</td>
-                                <td>PRĘDKOŚĆ WYSYŁANIA</td>
-                                <td>CENA</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="row">
-                        <form class="row">
-                            <div class="center">
-                                <button class="btn waves-effect waves-light" type="submit" name="action">Wybierz!
-                                    <i class="material-icons right">send</i>
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="collapsible-header">OFERTA #3</div>
-                <div class="collapsible-body">
-                    <div class="row">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Nam nec aliquam ipsum, vitae faucibus odio. Mauris euismod mi ligula, non gravida lectus efficitur id.
-                    Sed sed dapibus mi, vel volutpat lorem. Proin vel tempor metus.
-                    Ut arcu nisi, vehicula sit amet tellus nec, lobortis elementum ipsum.
-                    Nullam eu pretium ligula. Nunc eu luctus lorem, ut fringilla odio.
-                    </div>
-                    <div class="row">
-                        <table class="centered">
-                            <thead>
-                            <tr>
-                                <th>Prędkość pobierania</th>
-                                <th>Prędkość wysyłania</th>
-                                <th>Cena</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>PRĘDKOŚĆ POBIERNAIA</td>
-                                <td>PRĘDKOŚĆ WYSYŁANIA</td>
-                                <td>CENA</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="row">
-                        <form class="row">
-                            <div class="center">
-                                <button class="btn waves-effect waves-light" type="submit" name="action">Wybierz!
+                                <button class="waves-effect waves-light btn-large center-align" type="submit"
+                                        name="action">Wybierz!
                                     <i class="material-icons right">send</i>
                                 </button>
                             </div>
