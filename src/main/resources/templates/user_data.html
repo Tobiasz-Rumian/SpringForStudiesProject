@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Dane osobe</title>
+</head>
+<body>
+<ul id="nav-mobile" class="left hide-on-med-and-down blue-text text-darken-2" layout:fragment="nav">
+    <li><a th:href="@{/user_main/{id}(id=${user.id})}" href="/user_main/" class="grey-text text-darken-1">Strona główna</a></li>
+    <li><a th:href="@{/user_offers/{id}(id=${user.id})}" class="grey-text text-darken-1">Przeglądaj oferty</a></li>
+    <li><a th:href="@{/user_wallet/{id}(id=${user.id})}" class="grey-text text-darken-1">Doładuj portfel</a></li>
+    <li><a th:href="@{/user_facture/{id}(id=${user.id})}" class="grey-text text-darken-1">Przeglądaj faktury</a></li>
+    <li><a th:href="@{/user_account/{id}(id=${user.id})}" class="grey-text text-darken-1">Ustawienia konta</a></li>
+    <li><a href="/logout" class="grey-text text-darken-1">Wyloguj</a></li>
+</ul>
+<div class="row" layout:fragment="content">
+    <div class="col s12">
+        <h2 class="black-text center" th:text="'Witaj '+ ${user.firstName}"><b>Witaj IMIĘ</b></h2>
+    </div>
+
+    <div class="col s4 offset-s4 blue lighten-4">
+        <div class="row">
+            <div class="col s6"><p class="left-align">Twoje oferty: </p></div>
+            <div class="col s3"><p class="right-align"><b>OFERTA</b></p></div>
+        </div>
+
+        <div class="row">
+            <div class="col s6"><p class="left-align">Łączna kwota do zapłaty za usługi: </p></div>
+            <div class="col s3"><p class="right-align"><b>KWOTA PLN</b></p></div>
+            <div class="col s3">
+                <a class="waves-effect waves-light btn right-align disabled modal-trigger">Zapłać</a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col s6"><p class="left-align">W Twoim portfelu znajduje się: </p></div>
+            <div class="col s3"><p class="right-align" th:text="${user.money}"><b>KWOTA PLN</b></p></div>
+            <div class="col s3">
+                <a class="waves-effect waves-light btn right-align" href="/user_wallet">Doładuj</a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col s6"><p class="left-align">Termin zapłaty za usługi: </p></div>
+            <div class="col s3"><p class="right-align"><b>DATA</b></p></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
