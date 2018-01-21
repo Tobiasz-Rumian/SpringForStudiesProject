@@ -15,7 +15,7 @@
 
     <div class="row">
         <form class="col s4 offset-s4 blue lighten-4" autocomplete="off" action="#" th:action="@{/register}"
-              th:object="${user}" method="post" role="form" data-toggle="validator" name="myForm">
+              th:object="${user}" method="post" role="form" data-toggle="validator" name="myForm" onsubmit="return ValidationEvent()">
             <div th:if="${confirmationMessage}" class="alert alert-success" role="alert"
                  th:text="${confirmationMessage}"></div>
             <div th:if="${errorMessage}" class="alert alert-danger" role="alert" th:text="${errorMessage}"></div>
@@ -24,63 +24,63 @@
                 <!--firstName-->
                 <div class="input-field col s6">
                     <label for="firstName">Imię</label>
-                    <input id="firstName" type="text" th:field="*{firstName}" class="validate" name="firstName"/>
+                    <input id="firstName" type="text" th:field="*{firstName}" class="validate" name="firstName" required/>
                     <div th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"
                          class="validation-message alert alert-danger" role="alert"></div>
                 </div>
                 <!--lastName-->
                 <div class="input-field col s6">
                     <label for="lastName">Nazwisko</label>
-                    <input id="lastName" type="text" th:field="*{lastName}" class="validate" name="lastName"/>
+                    <input id="lastName" type="text" th:field="*{lastName}" class="validate" name="lastName" required/>
                     <div th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
                          class="validation-message alert alert-danger" role="alert"></div>
                 </div>
                 <!--pesel-->
                 <div class="input-field col s6">
                     <label for="pesel">Pesel</label>
-                    <input id="pesel" type="number" th:field="*{pesel}" class="validate" name="pesel"/>
+                    <input id="pesel" type="number" th:field="*{pesel}" class="validate" name="pesel" required/>
                     <div th:if="${#fields.hasErrors('pesel')}" th:errors="*{pesel}"
                          class="validation-message alert alert-danger" role="alert"></div>
                 </div>
                 <!--phoneNumber-->
                 <div class="input-field col s6">
                     <label for="phoneNumber">Numer telefonu</label>
-                    <input id="phoneNumber" type="tel" th:field="*{address.phoneNumber}" class="validate" name="phoneNumber"/>
+                    <input id="phoneNumber" type="tel" th:field="*{address.phoneNumber}" class="validate" name="phoneNumber" required/>
                     <div th:if="${#fields.hasErrors('address.phoneNumber')}" th:errors="*{address.phoneNumber}"
                          class="validation-message alert alert-danger" role="alert"></div>
                 </div>
                 <!--street-->
                 <div class="input-field col s6">
                     <label for="street">Ulica</label>
-                    <input id="street" type="text" th:field="*{address.street}" class="validate" name="street"/>
+                    <input id="street" type="text" th:field="*{address.street}" class="validate" name="street" required/>
                     <div th:if="${#fields.hasErrors('address.street')}" th:errors="*{address.street}"
                          class="validation-message alert alert-danger" role="alert"></div>
                 </div>
                 <!--city-->
                 <div class="input-field col s6">
                     <label for="city">Miasto</label>
-                    <input id="city" type="text" th:field="*{address.city}" class="validate" name="city"/>
+                    <input id="city" type="text" th:field="*{address.city}" class="validate" name="city" required/>
                     <div th:if="${#fields.hasErrors('address.city')}" th:errors="*{address.city}"
                          class="validation-message alert alert-danger" role="alert"></div>
                 </div>
                 <!--cityCode-->
                 <div class="input-field col s6">
                     <label for="cityCode">Kod pocztowy (Zachowaj format NN-NNN)</label>
-                    <input id="cityCode" type="text" th:field="*{address.cityCode}" class="validate" name="cityCode"/>
+                    <input id="cityCode" type="text" th:field="*{address.cityCode}" class="validate" name="cityCode" required/>
                     <div th:if="${#fields.hasErrors('address.cityCode')}" th:errors="*{address.cityCode}"
                          class="validation-message alert alert-danger" role="alert"></div>
                 </div>
                 <!--houseNumber-->
                 <div class="input-field col s6">
                     <label for="houseNumber">Numer domu</label>
-                    <input id="houseNumber" type="text" th:field="*{address.houseNumber}" class="validate" name="houseNumber"/>
+                    <input id="houseNumber" type="text" th:field="*{address.houseNumber}" class="validate" name="houseNumber" required/>
                     <div th:if="${#fields.hasErrors('address.houseNumber')}" th:errors="*{address.houseNumber}"
                          class="validation-message alert alert-danger" role="alert"></div>
                 </div>
                 <!--apartmentNumber-->
                 <div class="input-field col s6">
                     <label for="apartmentNumber">Numer mieszkania</label>
-                    <input id="apartmentNumber" type="text" th:field="*{address.apartmentNumber}" class="validate" name="apartmentNumber"/>
+                    <input id="apartmentNumber" type="text" th:field="*{address.apartmentNumber}" class="validate" name="apartmentNumber" required/>
                     <div th:if="${#fields.hasErrors('address.apartmentNumber')}" th:errors="*{address.apartmentNumber}"
                          class="validation-message alert alert-danger" role="alert"></div>
                 </div>
@@ -91,21 +91,21 @@
                 <!--email-->
                 <div class="input-field col s6">
                     <label for="email">Adres Email</label>
-                    <input id="email" type="email" th:field="*{email}"class="validate" name="email"/>
+                    <input id="email" type="email" th:field="*{email}"class="validate" name="email" required/>
                     <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
                          class="validation-message alert alert-danger" role="alert"></div>
                 </div>
                 <!--password-->
                 <div class="input-field col s6">
                     <label for="password">Hasło</label>
-                    <input id="password" type="password" th:field="*{password}" class="validate" name="password"/>
+                    <input id="password" type="password" th:field="*{password}" class="validate" name="password" required/>
                     <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
                          class="validation-message alert alert-danger" role="alert"></div>
                 </div>
                 <!--rePassword-->
                 <div class="input-field col s6">
                     <label for="rePassword">Powtórz hasło</label>
-                    <input id="rePassword" type="password" class="validate" name="rePassword" onkeyup="checkPass(); return false;"/>
+                    <input id="rePassword" type="password" class="validate" name="rePassword" onkeyup="checkPass(); return false;" required/>
                 </div>
 
                 <div class="col s6">
@@ -114,7 +114,7 @@
 
                 <div class="row">
                     <p>
-                        <input type="checkbox" class="filled-in" id="agree" data-error=".errorTxt13"/>
+                        <input type="checkbox" class="filled-in" id="agree" data-error=".errorTxt13" required/>
                         <label for="agree">Wyrażam zgodę na przetwarzanie moich danych osobowych, oraz oświadczam, że zapoznałem się z regulaminem serwisu.</label>
                     </p>
                 </div>
@@ -128,8 +128,6 @@
                         //Store the Confimation Message Object ...
                         var message = document.getElementById('errorMsg');
                         //Set the colors we will be using ...
-                        var goodColor = "#66cc66";
-                        var badColor = "#ff6666";
                         //Compare the values in the password field
                         //and the confirmation field
                         if(pass1.value == pass2.value)
@@ -151,22 +149,79 @@
                             message.innerHTML = "Hasła się różnią!"
                         }
                     }
+
+
                 </script>
             </div>
 
-                <div class="col s4 offset-s4 blue lighten-4">
-                    <div class="row valign-wrapper">
-                        <div class="center">
-                            <button class="btn waves-effect waves-light" type="submit" name="action">Zarejestruj się
-                                <i class="material-icons right">send</i>
-                            </button>
-                        </div>
+            <div class="col s4 offset-s4 blue lighten-4">
+                <div class="row valign-wrapper">
+                    <div class="center">
+                        <button class="btn waves-effect waves-light" type="submit" name="action">Zarejestruj się
+                            <i class="material-icons right">send</i>
+                        </button>
                     </div>
                 </div>
             </div>
-
         </form>
+
+        <script>
+            function ValidationEvent()
+            {
+                var firstName = document.getElementById("firstName").value;
+                var secondName = document.getElementById("lastName").value;
+                var phoneNumber = document.getElementById("phoneNumber").value;
+                var pesel = document.getElementById("pesel").value;
+                var password = document.getElementById("password").value;
+                var rePassword = document.getElementById("rePassword").value;
+                var cityCode = document.getElementById("cityCode").value;
+                alert("peselL: " + pesel.lenght)
+
+                if(pesel.length != 11)
+                {
+                    alert("Dlugość numeru PESEL powinna wynosić 11. Ty podałeś: " + pesel.length);
+                    return false;
+                }
+                else if(phoneNumber.length != 9)
+                {
+                    alert("Dlugość numeru telefonu powinna wynosić 9 znaków. Ty podałeś: " + phoneNumber.length);
+                    return false;
+                }
+                else if(password != rePassword)
+                {
+                    alert("Podane hasła się różnią!");
+                    return false;
+                }
+                else if(password.lenght < 8)
+                {
+                    alert("Hasło musi mieć co najmniej 8 znaków!" + password.length);
+                    return false;
+                }
+                else if(firstName.lenght < 3)
+                {
+                    alert("Imię musi mieć co najmniej 3 znaki. Ty podałeś: " + firstName.length);
+                    return false;
+                }
+                else if(lastName.length < 3)
+                {
+                    alert("Nazwisko musi mieć co najmniej 3 znaki. Ty podałeś: " + lastName.length);
+                    return false;
+                }
+                else if(cityCode[2] != '-' || cityCode.length != 6)
+                {
+                    alert("Błędny numer PESEL");
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+
+            }
+        </script>
     </div>
+
+</div>
 </div>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script type="text/javascript" src="js/plugins/chartist-js/chartist.min.js"></script>
