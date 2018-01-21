@@ -23,7 +23,7 @@ public class InvoiceService {
         return invoiceRepository.findAllByOwner(userId);
     }
 
-    public void createInvoice(User user, Offer offer) {
+    public Invoice createInvoice(User user, Offer offer) {
         Invoice invoice = Invoice.builder()
                 .invoiceNumber(user.getInvoices().size() + 1)
                 .issueDate(user.getPayDate().minusMonths(1))
@@ -32,6 +32,6 @@ public class InvoiceService {
                 .price(offer.getPrice())
                 .build();
         invoiceRepository.save(invoice);
-
+        return invoice;
     }
 }

@@ -14,7 +14,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -63,24 +62,20 @@ public class UserController {
     @GetMapping("/user_account/{id}")
     public String getAdminConsole(@PathVariable("id") long id, Model model) {
         model.addAttribute("user", userService.getUser(id));
-        model.addAttribute("unreadNotificationNumber", notificationService.getNumberOfUnreedUserNotifications(id));
+        model.addAttribute("unreadNotificationNumber", notificationService.getNumberOfUnreadNotifications());
         return "user_account";
     }
 
     @PostMapping("/user_account/{userId}")
     public String processChangeUserDataForm(@PathVariable("userId") long userId, Model model, @Valid User user, BindingResult bindingResult, HttpServletRequest request, @RequestParam Map requestParams, RedirectAttributes redir) {
-        if (bindingResult.getErrorCount() > 1) {
-            StringBuilder sb = new StringBuilder();
-            for (ObjectError e : bindingResult.getAllErrors()) sb.append(e.getObjectName()).append("\n");
-            model.addAttribute("errorMessage", sb);
-        }
-        User user1 = userService.getUserByEmail(user.getEmail());
-        user1.setFirstName(user.getFirstName());
-        user1.setLastName(user.getLastName());
-        user1.setPesel(user.getPesel());
-        user1.getAddress().setPhoneNumber(user.getAddress().getPhoneNumber());
-        user1.setEmail(user.getEmail());
-        if (requestParams.containsKey("passChange") && requestParams.get("passChange").equals("true"))
+        User user1 = userService.getUser(userId);
+        if (!requestParams.containsKey("passChange")) {
+            user1.setFirstName(user.getFirstName());
+            user1.setLastName(user.getLastName());
+            user1.setPesel(user.getPesel());
+            user1.getAddress().setPhoneNumber(user.getAddress().getPhoneNumber());
+            user1.setEmail(user.getEmail());
+        } else if (requestParams.get("passChange").equals("true"))
             user1.setPassword(bCryptPasswordEncoder.encode((CharSequence) requestParams.get("password")));
         userService.saveUser(user1);
         notificationService.addNotification(NotificationCode.USER_CHANGED_PERSONAL_DATA, user1);
@@ -189,14 +184,19 @@ public class UserController {
         BigDecimal money = user.getMoney();
         if (money.compareTo(offer.getPrice()) < 0) {
             model.addAttribute("message", "Nie masz wystarczająco środków");
-            return "error";
+            return getError(userId, model);
         }
         user.setPayDate(user.getPayDate().plusMonths(1));
         user.setMoney(user.getMoney().subtract(offer.getPrice()));
-        invoiceService.createInvoice(user, offer);
+        user.getInvoices().add(invoiceService.createInvoice(user, offer));
         userService.saveUser(user);
         model.addAttribute("user", user);
         return getUserMain(userId, model);
     }
 
+    @GetMapping("/error/{userId}")
+    public String getError(@PathVariable("userId") long userId, Model model) {
+        model.addAttribute("user", userService.getUser(userId));
+        return "error";
+    }
 }

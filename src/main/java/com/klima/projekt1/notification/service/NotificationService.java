@@ -40,8 +40,8 @@ public class NotificationService {
         return notifications;
     }
 
-    public long getNumberOfUnreedUserNotifications(long userId) {
-        return notificationRepository.countByOwnerIdAndSeenIsFalse(userId);
+    public long getNumberOfUnreadNotifications() {
+        return notificationRepository.countAllBySeenIsFalse();
     }
 
     public void addNotification(NotificationCode notificationCode, User user) {

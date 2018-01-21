@@ -25,8 +25,8 @@
                 <li><a th:href="@{/admin_console/{id}(id=${user.id})}" class="grey-text text-darken-1">Strona główna</a></li>
                 <li th:if="${unreadNotificationNumber ==0}"><a th:href="@{/admin_notifications/{id}(id=${user.id})}"
                                                                class="grey-text text-darken-1">Powiadomienia</a></li>
-                <li th:if="${unreadNotificationNumber <0}"><a th:href="@{/admin_notifications/{id}(id=${user.id})}"
-                                                              class="grey-text text-darken-1 red lighten-3">Powiadomienia</a></li>
+                <li th:if="${unreadNotificationNumber &gt; 0}"><a th:href="@{/admin_notifications/{id}(id=${user.id})}"
+                                                                  class="grey-text text-darken-1 red lighten-3">Powiadomienia</a></li>
                 <li><a th:href="@{/admin_offers/{id}(id=${user.id})}" class="grey-text text-darken-1">Panel zarządzania ofertami</a></li>
                 <li><a th:href="@{/admin_users/{id}(id=${user.id})}" class="grey-text text-darken-1">Panel zarządzania kontami użytkowników</a></li>
                 <li><a th:href="@{/user_account/{id}(id=${user.id})}"

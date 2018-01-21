@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml"
+      lang="pl" layout:decorator="layout/default">
+<head>
+    <meta charset="UTF-8">
+    <title>Error!</title>
+</head>
+<body>
+<div class="row" layout:fragment="content">
+    <div class="col s12">
+        <h2 class="black-text center" th:text="${message}">Error</h2>
+    </div>
+</body>
+</html>

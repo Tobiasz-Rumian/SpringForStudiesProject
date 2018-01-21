@@ -4,10 +4,7 @@ import com.klima.projekt1.invoice.model.entity.Invoice;
 import com.klima.projekt1.notification.model.entity.Notification;
 import com.klima.projekt1.offer.model.entity.Offer;
 import com.klima.projekt1.user.enums.Role;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
@@ -25,6 +22,8 @@ import static com.klima.projekt1.configuration.DatabaseRestrictions.PESEL_MAX_LE
 
 @Entity
 @Data
+@EqualsAndHashCode(exclude = "invoices")
+@ToString(exclude = "invoices")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

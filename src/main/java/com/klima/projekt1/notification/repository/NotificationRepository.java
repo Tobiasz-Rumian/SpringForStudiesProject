@@ -14,8 +14,7 @@ public interface NotificationRepository extends JpaRepository<Notification, Long
 
     List<Notification> getAllBySeenIsFalse();
 
-    long countByOwnerIdAndSeenIsFalse(long user);
-
+    long countAllBySeenIsFalse();
     long countByOwner(long user);
 
 }

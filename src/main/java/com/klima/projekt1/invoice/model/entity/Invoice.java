@@ -1,10 +1,7 @@
 package com.klima.projekt1.invoice.model.entity;
 
 import com.klima.projekt1.user.model.entity.User;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.Entity;
@@ -18,6 +15,8 @@ import java.time.format.DateTimeFormatter;
 
 @Entity
 @Data
+@EqualsAndHashCode(exclude = "owner")
+@ToString(exclude = "owner")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

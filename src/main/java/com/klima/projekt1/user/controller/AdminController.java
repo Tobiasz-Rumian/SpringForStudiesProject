@@ -29,14 +29,14 @@ public class AdminController {
     public String getAdminUsers(@PathVariable("id") long id, Model model) {
         model.addAttribute("user", userService.getUser(id));
         model.addAttribute("users", userMapper.toUserDTOs(userService.getUsers()));
-        model.addAttribute("unreadNotificationNumber", notificationService.getNumberOfUnreedUserNotifications(id));
+        model.addAttribute("unreadNotificationNumber", notificationService.getNumberOfUnreadNotifications());
         return "admin_users";
     }
 
     @GetMapping("/admin_console/{id}")
     public String getAdminConsole(@PathVariable("id") long id, Model model) {
         model.addAttribute("user", userService.getUser(id));
-        model.addAttribute("unreadNotificationNumber", notificationService.getNumberOfUnreedUserNotifications(id));
+        model.addAttribute("unreadNotificationNumber", notificationService.getNumberOfUnreadNotifications());
         model.addAttribute("pastPayDateNumber", userService.getNuberOfAllAfterPayDate());
         return "admin_console";
     }
@@ -44,7 +44,7 @@ public class AdminController {
     @GetMapping("/admin_notifications/{id}")
     public String getAdminNotifications(@PathVariable("id") long id, Model model) {
         model.addAttribute("user", userService.getUser(id));
-        model.addAttribute("unreadNotificationNumber", notificationService.getNumberOfUnreedUserNotifications(id));
+        model.addAttribute("unreadNotificationNumber", notificationService.getNumberOfUnreadNotifications());
         model.addAttribute("notifications", notificationMapper.toNotificationDtos(notificationService.getAllUnreedNotifications()));
         return "admin_notifications";
     }
