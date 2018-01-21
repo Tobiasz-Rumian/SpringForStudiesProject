@@ -174,8 +174,7 @@
                 var pesel = document.getElementById("pesel").value;
                 var password = document.getElementById("password").value;
                 var rePassword = document.getElementById("rePassword").value;
-                var cityCode = document.getElementById("cityCode").value;
-                alert("peselL: " + pesel.lenght)
+                var cityCode = document.getElementById("cityCode").value
 
                 if(pesel.length != 11)
                 {
@@ -209,7 +208,7 @@
                 }
                 else if(cityCode[2] != '-' || cityCode.length != 6)
                 {
-                    alert("Błędny numer PESEL");
+                    alert("Błędny numer pocztowy");
                     return false;
                 }
                 else
