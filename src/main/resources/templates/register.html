@@ -174,9 +174,14 @@
                 var pesel = document.getElementById("pesel").value;
                 var password = document.getElementById("password").value;
                 var rePassword = document.getElementById("rePassword").value;
-                var cityCode = document.getElementById("cityCode").value;
+                var cityCode = document.getElementById("cityCode").value
 
-                if (phoneNumber.length != 9)
+                if(pesel.length != 11)
+                {
+                    alert("Dlugość numeru PESEL powinna wynosić 11. Ty podałeś: " + pesel.length);
+                    return false;
+                }
+                else if(phoneNumber.length != 9)
                 {
                     alert("Dlugość numeru telefonu powinna wynosić 9 znaków. Ty podałeś: " + phoneNumber.length);
                     return false;
@@ -203,7 +208,7 @@
                 }
                 else if(cityCode[2] != '-' || cityCode.length != 6)
                 {
-                    alert("Błędny numer PESEL");
+                    alert("Błędny numer pocztowy");
                     return false;
                 }
                 else
