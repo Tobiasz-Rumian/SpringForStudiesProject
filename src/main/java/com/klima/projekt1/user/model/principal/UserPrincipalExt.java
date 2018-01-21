@@ -1,4 +1,4 @@
-package com.klima.projekt1.user.model.entity.principal;
+package com.klima.projekt1.user.model.principal;
 
 import com.klima.projekt1.user.model.entity.User;
 import org.springframework.security.core.GrantedAuthority;

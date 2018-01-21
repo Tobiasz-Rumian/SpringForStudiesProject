@@ -1,10 +1,9 @@
 package com.klima.projekt1.user.service;
 
-import com.klima.projekt1.offer.model.entity.Offer;
+import com.klima.projekt1.user.enums.Role;
 import com.klima.projekt1.user.model.entity.User;
-import com.klima.projekt1.user.model.entity.principal.UserPrincipalExt;
+import com.klima.projekt1.user.model.principal.UserPrincipalExt;
 import com.klima.projekt1.user.repository.UserRepository;
-import com.klima.projekt1.user.role.Role;
 import io.vavr.control.Try;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 
 import static com.klima.projekt1.configuration.ErrorCode.USER_NOT_FOUND;
@@ -59,5 +59,9 @@ public class UserService implements UserDetailsService {
 
     public List<User> getUsers() {
         return userRepository.findAll();
+    }
+
+    public long getNuberOfAllAfterPayDate() {
+        return userRepository.countAllByPayDateBefore(ZonedDateTime.now());
     }
 }

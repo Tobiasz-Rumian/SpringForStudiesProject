@@ -1,4 +1,4 @@
-package com.klima.projekt1.user.role;
+package com.klima.projekt1.user.enums;
 
 import com.klima.projekt1.user.model.entity.Authority;
 import lombok.AllArgsConstructor;

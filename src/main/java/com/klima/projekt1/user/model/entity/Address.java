@@ -4,16 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Range;
 
-import javax.persistence.*;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
-import static com.klima.projekt1.configuration.DatabaseRestrictions.PESEL_MAX_LENGTH;
 import static com.klima.projekt1.configuration.DatabaseRestrictions.PHONE_NUMBER_MAX_LENGTH;
 
 @Data
@@ -49,9 +47,9 @@ public class Address {
 
     public String getAddress(){
         return "Kod pocztowy: " + cityCode +
-                "\n miasto: " + city +
-                "\n ulica: " + street +
-                "\n numer domu: " + houseNumber + "/" + apartmentNumber +
-                "\n tel: " + phoneNumber;
+                " miasto: " + city +
+                " ulica: " + street +
+                " numer domu: " + houseNumber + "/" + apartmentNumber +
+                " tel: " + phoneNumber;
     }
 }

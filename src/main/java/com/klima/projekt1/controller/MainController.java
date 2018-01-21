@@ -34,13 +34,6 @@ public class MainController {
         return "index";
     }
 
-
-    @GetMapping("/admin_console/{id}")
-    public String getAdminConsole(@PathVariable("id") long id, Model model) {
-        model.addAttribute("user", userService.getUser(id));
-        return "admin_console";
-    }
-
     @GetMapping("/contact/{id}")
     public String getContact(@PathVariable("id") long id, Model model) {
         model.addAttribute("user", userService.getUser(id));

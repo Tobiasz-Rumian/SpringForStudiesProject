@@ -1,4 +1,4 @@
-package com.klima.projekt1.user.model.entity.dto;
+package com.klima.projekt1.user.model.dto;
 
 import lombok.Builder;
 import lombok.Data;

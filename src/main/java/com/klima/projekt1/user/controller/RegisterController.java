@@ -1,16 +1,12 @@
 package com.klima.projekt1.user.controller;
 
+import com.klima.projekt1.user.enums.Role;
 import com.klima.projekt1.user.model.entity.User;
-import com.klima.projekt1.user.role.Role;
 import com.klima.projekt1.user.service.UserService;
-import com.nulabinc.zxcvbn.Strength;
-import com.nulabinc.zxcvbn.Zxcvbn;
-import io.vavr.control.Try;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;

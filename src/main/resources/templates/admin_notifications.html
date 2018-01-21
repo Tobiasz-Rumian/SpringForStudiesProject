@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html   lang="pl" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorator="layout/default">
+<html lang="pl" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorator="layout/default">
 <head lang="pl">
     <meta charset="UTF-8"></meta>
     <title>Powiadomiania</title>
@@ -10,12 +11,15 @@
 <body>
 
 <ul id="nav-mobile" class="left hide-on-med-and-down blue-text text-darken-2" layout:fragment="nav">
-    <li><a href="/admin_console" class="grey-text text-darken-1">Strona główna</a></li>
-    <li><a href="/admin_notifications" class="grey-text text-darken-1 red lighten-3">Powiadomienia</a></li>
-    <li><a href="/admin_offers" class="grey-text text-darken-1">Panel zarządzania ofertami</a></li>
-    <li><a href="/admin_users" class="grey-text text-darken-1">Panel zarządzania kontami użytkowników</a></li>
+    <li><a th:href="@{/admin_console/{id}(id=${user.id})}" class="grey-text text-darken-1">Strona główna</a></li>
+    <li><a th:href="@{/admin_notifications/{id}(id=${user.id})}" class="grey-text text-darken-1 red lighten-3">Powiadomienia</a>
+    </li>
+    <li><a th:href="@{/admin_offers/{id}(id=${user.id})}" class="grey-text text-darken-1">Panel zarządzania ofertami</a>
+    </li>
+    <li><a th:href="@{/admin_users/{id}(id=${user.id})}" class="grey-text text-darken-1">Panel zarządzania kontami
+        użytkowników</a></li>
     <li><a href="" class="grey-text text-darken-1">Ustawienia konta</a></li>
-    <li><a href="" class="grey-text text-darken-1">Wyloguj</a></li>
+    <li><a href="/logout" class="grey-text text-darken-1">Wyloguj</a></li>
 </ul>
 
 <div class="row" layout:fragment="content">
@@ -25,59 +29,18 @@
 
     <div class="col s4 offset-s4 blue lighten-4">
         <ul class="collapsible" data-collapsible="accordion">
-            <li>
-                <div class="collapsible-header">Użytkownik X wybrał ofertę Y</div>
-                <div class="collapsible-body">
-                    <div class="row">
-                        <div class="col s6 align-left">
-                            <p>Adres zamieszkania klienta:</p>
-                        </div>
-                        <div class="col s6 align-right">
-                            <p>ul. Szybka 1A/3 Wrocław 47-221</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <table class="left">
-                            <thead>
-                            <tr>
-                                <th>Imię</th>
-                                <th>Nazwisko</th>
-                                <th>Numer Telefonu</th>
-                                <th>Adres E-mail</th>
-                                <th>PESEL</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>Marcin</td>
-                                <td>Klima</td>
-                                <td>586147584</td>
-                                <td>kowalski34@gmail.com</td>
-                                <td>11223344556</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="row">
-                        <form class="row">
-                            <div class="center">
-                                <button class="btn waves-effect waves-light" type="submit" name="action">Zatwierdź
-                                    <i class="material-icons right">send</i>
-                                </button>
-                            </div>
-                        </form>
-                    </div>
+            <li th:each="notification : ${notifications}">
+                <div class="collapsible-header"
+                     th:text="${notification.user.firstName}+' '+${notification.user.lastName}+${notification.information}+${notification.offer}">
+                    Użytkownik X wybrał ofertę Y
                 </div>
-            </li>
-            <li>
-                <div class="collapsible-header">Użytkownik X chce zrezygnować z oferty Y</div>
                 <div class="collapsible-body">
                     <div class="row">
                         <div class="col s6 align-left">
                             <p>Adres zamieszkania klienta:</p>
                         </div>
                         <div class="col s6 align-right">
-                            <p>ul. Szybka 1A/3 Wrocław 47-221</p>
+                            <p th:text="${notification.user.address}">ul. Szybka 1A/3 Wrocław 47-221</p>
                         </div>
                     </div>
                     <div class="row">
@@ -93,11 +56,11 @@
                             </thead>
                             <tbody>
                             <tr>
-                                <td>Marcin</td>
-                                <td>Klima</td>
-                                <td>586147584</td>
-                                <td>kowalski34@gmail.com</td>
-                                <td>11223344556</td>
+                                <td th:text="${notification.user.firstName}">Marcin</td>
+                                <td th:text="${notification.user.lastName}">Klima</td>
+                                <td th:text="${notification.user.phoneNumber}">586147584</td>
+                                <td th:text="${notification.user.email}">kowalski34@gmail.com</td>
+                                <td th:text="${notification.user.pesel}">11223344556</td>
                             </tr>
                             </tbody>
                         </table>

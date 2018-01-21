@@ -1,18 +1,23 @@
 package com.klima.projekt1.user.model.entity;
 
 import com.klima.projekt1.invoice.model.entity.Invoice;
+import com.klima.projekt1.notification.model.entity.Notification;
 import com.klima.projekt1.offer.model.entity.Offer;
-import com.klima.projekt1.user.role.Role;
+import com.klima.projekt1.user.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.*;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 import static com.klima.projekt1.configuration.DatabaseRestrictions.PESEL_MAX_LENGTH;
@@ -69,6 +74,12 @@ public class User {
     @Column(name = "money")
     private BigDecimal money = new BigDecimal(0);
 
-    @NotNull
-    private ZonedDateTime payDate =ZonedDateTime.now();
+    private ZonedDateTime payDate;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<Notification> notifications = new HashSet<>();
+
+    public String getName() {
+        return firstName + " " + lastName;
+    }
 }
