@@ -44,7 +44,6 @@
                 <li><a href="/" class="grey-text text-darken-1">Strona główna</a></li>
                 <li><a href="/login" class="grey-text text-darken-1">Zaloguj</a></li>
                 <li><a href="/register" class="grey-text text-darken-1">Zarejestruj</a></li>
-                <li><a href="" class="grey-text text-darken-1">Kontakt</a></li>
             </ul>
             <!--Nav for user-->
             <ul th:if="${user.role == T(com.klima.projekt1.user.enums.Role).USER}" id="nav-mobile"
@@ -55,7 +54,7 @@
                         class="grey-text text-darken-1">Przeglądaj oferty</a></li>
                  <li><a th:href="@{/user_wallet/{id}(id=${user.id})}"
                         class="grey-text text-darken-1">Doładuj portfel</a></li>
-                 <li><a th:href="@{/user_facture/{id}(id=${user.id})}" class="grey-text text-darken-1">Przeglądaj faktury</a></li>
+                 <li><a th:href="@{/user_invoice/{id}(id=${user.id})}" class="grey-text text-darken-1">Przeglądaj faktury</a></li>
                  <li><a th:href="@{/user_account/{id}(id=${user.id})}"
                         class="grey-text text-darken-1">Ustawienia konta</a></li>
                  <li>

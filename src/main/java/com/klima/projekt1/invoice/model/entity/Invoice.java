@@ -14,6 +14,7 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @Data
@@ -35,4 +36,16 @@ public class Invoice {
     private ZonedDateTime paymentDeadline;
     @NotNull
     private ZonedDateTime paymentDate;
+
+    public String getIssueDateAsText() {
+        return DateTimeFormatter.ofPattern("dd/MM/yyyy").format(issueDate);
+    }
+
+    public String getPaymentDeadlineAsText() {
+        return DateTimeFormatter.ofPattern("dd/MM/yyyy").format(paymentDeadline);
+    }
+
+    public String getPaymentDateAsText() {
+        return DateTimeFormatter.ofPattern("dd/MM/yyyy").format(paymentDate);
+    }
 }

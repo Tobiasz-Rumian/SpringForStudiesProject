@@ -17,6 +17,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -81,5 +82,9 @@ public class User {
 
     public String getName() {
         return firstName + " " + lastName;
+    }
+
+    public String getPayDateAsText() {
+        return DateTimeFormatter.ofPattern("dd/MM/yyyy").format(payDate);
     }
 }

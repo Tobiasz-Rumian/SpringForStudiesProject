@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pl" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.w3.org/1999/xhtml"
       layout:decorator="layout/default">
 <head>
     <meta charset="UTF-8">
@@ -24,12 +25,12 @@
             </thead>
 
             <tbody>
-            <tr>
-                <td>NUMER FAKTURY</td>
-                <td>CENA</td>
-                <td>TERMIN ZAPŁATY</td>
-                <td>DATA WYSTAWIENIA</td>
-                <td>DATA WPŁATY</td>
+            <tr th:each="invoice : ${invoices}">
+                <td th:text="${invoice.invoiceNumber}">NUMER FAKTURY</td>
+                <td th:text="${invoice.price}">CENA</td>
+                <td th:text="${invoice.paymentDeadlineAsText}">TERMIN ZAPŁATY</td>
+                <td th:text="${invoice.issueDateAsText}">DATA WYSTAWIENIA</td>
+                <td th:text="${invoice.paymentDateAsText}">DATA WPŁATY</td>
             </tr>
             </tbody>
         </table>

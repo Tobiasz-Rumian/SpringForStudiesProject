@@ -21,8 +21,21 @@
             <div class="col s6"><p class="left-align">Łączna kwota do zapłaty za usługi: </p></div>
             <div class="col s3"><p class="right-align"><b th:text="${leftToPay}">KWOTA PLN</b></p></div>
             <div class="col s3">
-                <a th:if="${leftToPay!=0}" class="waves-effect waves-light btn right-align modal-trigger">Zapłać</a>
-                <a th:if="${leftToPay==0}" class="waves-effect waves-light btn right-align disabled modal-trigger">Zapłać</a>
+                <form class="col s6 blue lighten-4" th:action="@{/pay/{id}(id=${user.id})}" method="post" role="form">
+                    <div class="center">
+                        <button th:if="${leftToPay!=0}" class="waves-effect waves-light btn right-align modal-trigger"
+                                type="submit"
+                                name="action">Zapłać
+                        </button>
+                        <button th:if="${leftToPay==0}" class="waves-effect waves-light btn right-align modal-trigger"
+                                type="submit"
+                                name="action">Zapłać
+                        </button>
+                        <p th:text="'Zapłać za kolejną ('+${user.offer.price}+'zł)'"></p>
+
+                    </div>
+                </form>
+
             </div>
         </div>
 
@@ -36,7 +49,7 @@
 
         <div class="row">
             <div class="col s6"><p class="left-align">Termin zapłaty za usługi: </p></div>
-            <div class="col s3"><p class="right-align"><b th:text="${user.payDate}">DATA</b></p></div>
+            <div class="col s3"><p class="right-align"><b th:text="${user.payDateAsText}">DATA</b></p></div>
         </div>
     </div>
 </div>

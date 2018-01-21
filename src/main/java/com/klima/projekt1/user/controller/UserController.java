@@ -1,5 +1,6 @@
 package com.klima.projekt1.user.controller;
 
+import com.klima.projekt1.invoice.service.InvoiceService;
 import com.klima.projekt1.notification.model.enums.NotificationCode;
 import com.klima.projekt1.notification.service.NotificationService;
 import com.klima.projekt1.offer.model.entity.Offer;
@@ -30,12 +31,18 @@ public class UserController {
     private UserService userService;
     private NotificationService notificationService;
     private OfferService offerService;
+    private InvoiceService invoiceService;
     @Autowired
-    public UserController(BCryptPasswordEncoder bCryptPasswordEncoder, UserService userService, NotificationService notificationService, OfferService offerService) {
+    public UserController(BCryptPasswordEncoder bCryptPasswordEncoder,
+                          UserService userService,
+                          NotificationService notificationService,
+                          OfferService offerService,
+                          InvoiceService invoiceService) {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.userService = userService;
         this.notificationService = notificationService;
         this.offerService = offerService;
+        this.invoiceService = invoiceService;
     }
 
     @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
@@ -167,4 +174,29 @@ public class UserController {
         model.addAttribute("offers", offerService.getOffers());
         return "user_offers";
     }
+
+    @GetMapping("/user_invoice/{id}")
+    public String getUserInvoice(@PathVariable("id") long id, Model model) {
+        model.addAttribute("user", userService.getUser(id));
+        model.addAttribute("invoices", invoiceService.getAllUserInvoices(userService.getUser(id)));
+        return "user_invoice";
+    }
+
+    @PostMapping("/pay/{userId}")
+    public String processPayForm(@PathVariable("userId") long userId, Model model) {
+        User user = userService.getUser(userId);
+        Offer offer = user.getOffer();
+        BigDecimal money = user.getMoney();
+        if (money.compareTo(offer.getPrice()) < 0) {
+            model.addAttribute("message", "Nie masz wystarczająco środków");
+            return "error";
+        }
+        user.setPayDate(user.getPayDate().plusMonths(1));
+        user.setMoney(user.getMoney().subtract(offer.getPrice()));
+        invoiceService.createInvoice(user, offer);
+        userService.saveUser(user);
+        model.addAttribute("user", user);
+        return getUserMain(userId, model);
+    }
+
 }

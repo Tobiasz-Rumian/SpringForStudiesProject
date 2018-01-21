@@ -40,12 +40,6 @@ public class MainController {
         return "contact";
     }
 
-    @GetMapping("/user_invoice/{id}")
-    public String getUserInvoice(@PathVariable("id") long id, Model model) {
-        model.addAttribute("user", userService.getUser(id));
-        return "user_invoice";
-    }
-
    @GetMapping("/admin_notifications")
    public String getAdminNotifications(@PathVariable("id") long id, Model model) {
        model.addAttribute("user", userService.getUser(id));

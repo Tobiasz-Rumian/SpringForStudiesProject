@@ -13,9 +13,6 @@
     </div>
 
     <div class="col s4 offset-s4 blue lighten-4">
-        <p>
-            Maksymalna kwota jaką mogą Państwo zasilić konto wynosi 200zł.
-        </p>
         <form class="col s6 blue lighten-4" autocomplete="off" action="#"
               th:action="@{/user_wallet/{id}(id=${user.id})}"
               th:object="${amount}" method="post" role="form" data-toggle="validator">
