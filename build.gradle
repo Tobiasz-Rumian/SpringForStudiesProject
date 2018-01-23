@@ -43,37 +43,30 @@ idea {
 }
 
 dependencies {
-	compile('org.springframework.boot:spring-boot-starter-actuator')
-	compile('org.springframework.boot:spring-boot-starter-aop')
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-validation')
 	compile('org.springframework.boot:spring-boot-starter-web')
-	compile("io.springfox:springfox-swagger2:${swagger_version}")
-	compile("io.springfox:springfox-swagger-ui:${swagger_version}")
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: "$spring_boot_starter_security_version"
 	compile('org.springframework.security:spring-security-jwt')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+	compile("io.springfox:springfox-swagger2:${swagger_version}")
+	compile("io.springfox:springfox-swagger-ui:${swagger_version}")
 	compile "org.mapstruct:mapstruct-jdk8:${mapstruct_version}", "org.projectlombok:lombok:${lombok_version}"
 	apt "org.mapstruct:mapstruct-processor:${mapstruct_version}", "org.projectlombok:lombok:${lombok_version}"
-	testCompile('org.springframework.boot:spring-boot-starter-test')
 	testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: "${junit_jupiter_version}"
 	runtime group: 'org.junit.vintage', name: 'junit-vintage-engine', version: "${junit_vintage_version}"
 	runtime group: 'org.junit.platform', name: 'junit-platform-runner', version: "${junit_runner_version}"
 	testCompile "org.assertj:assertj-core:${assertj_version}"
 	testCompile group: 'org.mockito', name: 'mockito-core', version: "${mockito_version}"
-	compile group: 'com.google.guava', name: 'guava', version: "$guava_version"
 	compile group: 'io.vavr', name: 'vavr', version: "$vavr_version"
-	compile('org.springframework.boot:spring-boot-starter-websocket')
 	compile group: 'mysql', name: 'mysql-connector-java', version: "$mysql_connector_version"
 	compile group: 'org.hibernate', name: 'hibernate-core', version: "$hibernate_version"
 	compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: "$hibernate_version"
 	compile group: 'org.springframework.security', name: 'spring-security-messaging', version: "$spring_security_messaging_version"
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: "$starter_thymeleaf_version"
-	testCompile group: 'org.subethamail', name: 'subethasmtp', version: "${subethasmtp_version}"
 	compile group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: "${junit_jupiter_version}"
 	compile group: 'org.junit.jupiter', name: 'junit-jupiter-params', version: "${junit_jupiter_version}"
 	testCompile group: 'org.junit.vintage', name: 'junit-vintage-engine', version: "${junit_vintage_version}"
-	testCompile group: 'org.subethamail', name: 'subethasmtp', version: "${subethasmtp_version}"
-	compile group: 'io.projectreactor', name: 'reactor-bus', version: "${reactor_version}"
 	testCompile group: 'org.springframework.security', name: 'spring-security-test', version: "${spring_security_test_version}"
 	compile group: 'uk.com.robust-it', name: 'cloning', version: "${cloning_version}"
 	compile 'net.sourceforge.nekohtml:nekohtml:1.9.22'
