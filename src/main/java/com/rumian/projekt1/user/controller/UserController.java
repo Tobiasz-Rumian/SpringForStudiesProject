@@ -1,24 +1,19 @@
 package com.rumian.projekt1.user.controller;
 
-import com.rumian.projekt1.invoice.service.InvoiceService;
 import com.rumian.projekt1.notification.model.enums.NotificationCode;
 import com.rumian.projekt1.notification.service.NotificationService;
-import com.rumian.projekt1.offer.model.entity.Offer;
-import com.rumian.projekt1.offer.service.OfferService;
 import com.rumian.projekt1.user.enums.Role;
-import com.rumian.projekt1.user.model.dto.MoneyTransferDto;
 import com.rumian.projekt1.user.model.entity.User;
 import com.rumian.projekt1.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
@@ -29,45 +24,27 @@ public class UserController {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
     private UserService userService;
     private NotificationService notificationService;
-    private OfferService offerService;
-    private InvoiceService invoiceService;
     @Autowired
     public UserController(BCryptPasswordEncoder bCryptPasswordEncoder,
                           UserService userService,
-                          NotificationService notificationService,
-                          OfferService offerService,
-                          InvoiceService invoiceService) {
+                          NotificationService notificationService) {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.userService = userService;
         this.notificationService = notificationService;
-        this.offerService = offerService;
-        this.invoiceService = invoiceService;
-    }
-
-    @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
-    public ModelAndView login() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("user", userService.getUser());
-        modelAndView.setViewName("login");
-        return modelAndView;
-    }
-
-    @GetMapping("/login_error")
-    public String loginError(Model model) {
-        model.addAttribute("user", userService.getUser());
-        model.addAttribute("loginError", true);
-        return "login";
     }
 
     @GetMapping("/user_account/{id}")
-    public String getAdminConsole(@PathVariable("id") long id, Model model) {
+    public String getUserMainPage(@PathVariable("id") long id, Model model) {
         model.addAttribute("user", userService.getUser(id));
         model.addAttribute("unreadNotificationNumber", notificationService.getNumberOfUnreadNotifications());
         return "user_account";
     }
 
     @PostMapping("/user_account/{userId}")
-    public String processChangeUserDataForm(@PathVariable("userId") long userId, Model model, @Valid User user, BindingResult bindingResult, HttpServletRequest request, @RequestParam Map requestParams, RedirectAttributes redir) {
+    public String processChangeUserDataForm(@PathVariable("userId") long userId,
+                                            Model model,
+                                            @Valid User user,
+                                            @RequestParam Map requestParams) {
         User user1 = userService.getUser(userId);
         if (!requestParams.containsKey("passChange")) {
             user1.setFirstName(user.getFirstName());
@@ -108,95 +85,7 @@ public class UserController {
         return "user_main";
     }
 
-    @GetMapping("/user_wallet/{id}")
-    public String getUserWallet(@PathVariable("id") long id, Model model) {
-        model.addAttribute("user", userService.getUser(id));
-        model.addAttribute("amount", new MoneyTransferDto(0));
-        return "user_wallet";
-    }
-
-    @PostMapping("/user_wallet/{userId}")
-    public String processUserWalletForm(@PathVariable("userId") long userId, @Valid MoneyTransferDto amount, Model model) {
-        User user = userService.getUser(userId);
-        if (amount.getAmount() <= 0d) {
-            model.addAttribute("message", "Kwota nie może być mniejsza lub równa 0!");
-            return "error";
-        }
-        user.setMoney(user.getMoney().add(BigDecimal.valueOf(amount.getAmount())));
-        userService.saveUser(user);
-        model.addAttribute("user", user);
-        model.addAttribute("message", "Pomyślnie zwiększono stan konta.");
-        return getUserWallet(userId, model);
-    }
 
 
-    @GetMapping("/user_offers/{id}")
-    public String getUserOffers(@PathVariable("id") long id, Model model) {
-        model.addAttribute("user", userService.getUser(id));
-        model.addAttribute("offers", offerService.getOffers());
-        return "user_offers";
-    }
 
-    @PostMapping("/user_offers/{userId}/{offerId}")
-    public String processUserOffersForm(@PathVariable("userId") long userId, @PathVariable("offerId") long offerId, Model model) {
-        User user = userService.getUser(userId);
-        if (user.getOffer() != null) {
-            model.addAttribute("message", "Posiadasz już ofertę");
-            return "error";
-        }
-        Offer offer = offerService.getOffer(offerId);
-        user.setOffer(offer);
-        user.setPayDate(ZonedDateTime.now().plusMonths(1));
-        userService.saveUser(user);
-        notificationService.addNotification(NotificationCode.USER_CHANGED_PERSONAL_DATA, user);
-        model.addAttribute("user", user);
-        model.addAttribute("offers", offerService.getOffers());
-        return "user_offers";
-    }
-
-    @PostMapping("/user_offers_delete/{userId}")
-    public String processUserOffersDeleteForm(@PathVariable("userId") long userId, Model model) {
-        User user = userService.getUser(userId);
-        if (user.getOffer() == null) {
-            model.addAttribute("message", "Nie posiadasz oferty");
-            return "error";
-        }
-        user.setPayDate(null);
-        user.setOffer(null);
-        userService.saveUser(user);
-        notificationService.addNotification(NotificationCode.USER_RESIGN_FROM_OFFER, user);
-        model.addAttribute("user", user);
-        model.addAttribute("offers", offerService.getOffers());
-        return "user_offers";
-    }
-
-    @GetMapping("/user_invoice/{id}")
-    public String getUserInvoice(@PathVariable("id") long id, Model model) {
-        model.addAttribute("user", userService.getUser(id));
-        model.addAttribute("invoices", invoiceService.getAllUserInvoices(userService.getUser(id)));
-        return "user_invoice";
-    }
-
-    @PostMapping("/pay/{userId}")
-    public String processPayForm(@PathVariable("userId") long userId, Model model) {
-        User user = userService.getUser(userId);
-        Offer offer = user.getOffer();
-        BigDecimal money = user.getMoney();
-        if (money.compareTo(offer.getPrice()) < 0) {
-            model.addAttribute("message", "Nie masz wystarczająco środków");
-            return getError(userId, model);
-        }
-        user.setPayDate(user.getPayDate().plusMonths(1));
-        user.setMoney(user.getMoney().subtract(offer.getPrice()));
-        user.getInvoices().add(invoiceService.createInvoice(user, offer));
-        userService.saveUser(user);
-        model.addAttribute("user", user);
-        return getUserMain(userId, model);
-    }
-
-    @GetMapping("/error/{userId}")
-    public String getError(@PathVariable("userId") long userId, Model model) {
-        model.addAttribute("user", userService.getUser(userId));
-        return "error";
-    }
 }

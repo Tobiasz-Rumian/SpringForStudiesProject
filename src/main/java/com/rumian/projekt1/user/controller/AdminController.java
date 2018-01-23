@@ -18,7 +18,10 @@ public class AdminController {
     private NotificationMapper notificationMapper;
 
     @Autowired
-    public AdminController(UserService userService, UserMapper userMapper, NotificationService notificationService, NotificationMapper notificationMapper) {
+    public AdminController(UserService userService,
+                           UserMapper userMapper,
+                           NotificationService notificationService,
+                           NotificationMapper notificationMapper) {
         this.userService = userService;
         this.userMapper = userMapper;
         this.notificationService = notificationService;
@@ -37,7 +40,7 @@ public class AdminController {
     public String getAdminConsole(@PathVariable("id") long id, Model model) {
         model.addAttribute("user", userService.getUser(id));
         model.addAttribute("unreadNotificationNumber", notificationService.getNumberOfUnreadNotifications());
-        model.addAttribute("pastPayDateNumber", userService.getNuberOfAllAfterPayDate());
+        model.addAttribute("pastPayDateNumber", userService.getNumberOfAllAfterPayDate());
         return "admin_console";
     }
 

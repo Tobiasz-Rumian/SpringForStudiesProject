@@ -53,7 +53,7 @@ public class UserService implements UserDetailsService {
         return new UserPrincipalExt(user);
     }
 
-    public void saveUser(User user){
+    public void saveUser(User user) {
         userRepository.save(user);
     }
 
@@ -61,7 +61,7 @@ public class UserService implements UserDetailsService {
         return userRepository.findAll();
     }
 
-    public long getNuberOfAllAfterPayDate() {
+    public long getNumberOfAllAfterPayDate() {
         return userRepository.countAllByPayDateBefore(ZonedDateTime.now());
     }
 
