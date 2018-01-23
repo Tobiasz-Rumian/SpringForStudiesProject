@@ -35,5 +35,5 @@ logging:
     org:
       springframework:
         web: DEBUG
-      hibernate: ERROR
+      hibernate: ERROR_MESSAGE_SITE
 

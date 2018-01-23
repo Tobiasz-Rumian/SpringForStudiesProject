@@ -20,7 +20,7 @@
         <span class="blue-text text-darken 2">
             <a href="/" class="brand-logo right">Logo</a>
             <!--Nav for admin-->
-            <ul th:if="${user.role == T(com.klima.projekt1.user.enums.Role).ADMIN}" id="nav-mobile"
+            <ul th:if="${user.role == T(com.rumian.projekt1.user.enums.Role).ADMIN}" id="nav-mobile"
                 class="left hide-on-med-and-down blue-text text-darken-2">
                 <li><a th:href="@{/admin_console/{id}(id=${user.id})}" class="grey-text text-darken-1">Strona główna</a></li>
                 <li th:if="${unreadNotificationNumber ==0}"><a th:href="@{/admin_notifications/{id}(id=${user.id})}"
@@ -39,14 +39,14 @@
                 </li>
             </ul>
             <!--Nav for unlogged-->
-            <ul th:if="${user.role == T(com.klima.projekt1.user.enums.Role).UNLOGGED}" id="nav-mobile"
+            <ul th:if="${user.role == T(com.rumian.projekt1.user.enums.Role).UNLOGGED}" id="nav-mobile"
                 class="left hide-on-med-and-down blue-text text-darken-2">
                 <li><a href="/" class="grey-text text-darken-1">Strona główna</a></li>
                 <li><a href="/login" class="grey-text text-darken-1">Zaloguj</a></li>
                 <li><a href="/register" class="grey-text text-darken-1">Zarejestruj</a></li>
             </ul>
             <!--Nav for user-->
-            <ul th:if="${user.role == T(com.klima.projekt1.user.enums.Role).USER}" id="nav-mobile"
+            <ul th:if="${user.role == T(com.rumian.projekt1.user.enums.Role).USER}" id="nav-mobile"
                 class="left hide-on-med-and-down blue-text text-darken-2">
                  <li><a th:href="@{/user_main/{id}(id=${user.id})}"
                         class="grey-text text-darken-1">Strona główna</a></li>
