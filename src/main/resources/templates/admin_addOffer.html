@@ -1,59 +1,63 @@
 <!DOCTYPE html>
-<html   lang="pl" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorator="layout/default"
-        xmlns:th="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      lang="pl"
+      layout:decorator="layout/default">
 <head lang="pl">
-    <meta charset="UTF-8"></meta>
-    <title>Dodawanie oferty</title>
+    <meta charset="UTF-8"/>
+    <title th:text="#{messages.admin.addOffer.title}">Add offer</title>
 </head>
 <body>
 <div class="row" layout:fragment="content">
     <div class="col s12">
-        <h2 class="red-text text-darken-3 center"><b>Dodawanie oferty</b></h2>
+        <h2 class="red-text text-darken-3 center"><b th:text="#{messages.admin.addOffer.mainHeader}">Add offer</b></h2>
     </div>
 
     <div class="col s4 offset-s4 blue lighten-4">
         <div class="row">
             <form class="blue lighten-4" autocomplete="off" action="#" th:action="@{'/admin_addOffer/'+${user.id}+'?offerId='+${offer.id}}"
                   th:object="${offer}" method="post" role="form" data-toggle="validator">
-                <p class="center">Dane oferty</p>
+                <h5 class="center" th:text="#{messages.admin.addOffer.header}">Offer data</h5>
                 <div class="row" id="personal_data">
                     <!--name-->
                     <div class="input-field col s6">
-                        <label for="name">Nazwa</label>
+                        <label for="name" th:text="#{messages.admin.addOffer.label.name}">Name</label>
                         <input id="name" type="text" th:field="*{name}" th:value="${name}" class="validate"/>
                         <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
                              class="validation-message alert alert-danger" role="alert"></div>
                     </div>
                     <!--description-->
                     <div class="input-field col s6">
-                        <label for="description">Opis</label>
+                        <label for="description"
+                               th:text="#{messages.admin.addOffer.label.description}">Description</label>
                         <input id="description" type="text" th:field="*{description}" th:value="${description}" class="validate"/>
                         <div th:if="${#fields.hasErrors('description')}" th:errors="*{description}"
                              class="validation-message alert alert-danger" role="alert"></div>
                     </div>
                     <!--downSpeed-->
                     <div class="input-field col s6">
-                        <label for="downloadSpeed">Deklarowana prędkość pobierania [Mb/s]</label>
+                        <label for="downloadSpeed" th:text="#{messages.admin.addOffer.label.downloadSpeed}">Download
+                            speed [Mb/s]</label>
                         <input id="downloadSpeed" type="text" th:field="*{downloadSpeed}" th:value="${downloadSpeed}" class="validate"/>
                         <div th:if="${#fields.hasErrors('downloadSpeed')}" th:errors="*{downloadSpeed}"
                              class="validation-message alert alert-danger" role="alert"></div>
                     </div>
                     <!--uploadSpeed-->
                     <div class="input-field col s6">
-                        <label for="uploadSpeed">Deklarowana prędkość wysyłania [Mb/s]</label>
+                        <label for="uploadSpeed" th:text="#{messages.admin.addOffer.label.uploadSpeed}">Upload speed
+                            [Mb/s]</label>
                         <input id="uploadSpeed" type="text" th:field="*{uploadSpeed}" th:value="${uploadSpeed}" class="validate"/>
                         <div th:if="${#fields.hasErrors('uploadSpeed')}" th:errors="*{uploadSpeed}"
                              class="validation-message alert alert-danger" role="alert"></div>
                     </div>
                     <!--price-->
                     <div class="input-field col s6">
-                        <label for="price">Cena [zł/mc]</label>
+                        <label for="price" th:text="#{messages.admin.addOffer.label.price}">Price [zł/mc]</label>
                         <input id="price" type="text" th:field="*{price}" th:value="${price}" class="validate"/>
                         <div th:if="${#fields.hasErrors('price')}" th:errors="*{price}"
                              class="validation-message alert alert-danger" role="alert"></div>
                     </div>
-                    <button class="btn waves-effect waves-light" type="submit" name="action">Zatwierdź
+                    <button class="btn waves-effect waves-light" type="submit" name="action"
+                            th:text="#{messages.common.button.confirm}">Confirm
                         <i class="material-icons right">send</i>
                     </button>
                 </div>

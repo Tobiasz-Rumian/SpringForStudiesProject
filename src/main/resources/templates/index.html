@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        xmlns:th="http://www.thymeleaf.org"
         layout:decorator="layout/default">
 <head lang="pl">
-    <title>Strona Twojego dostawcy internegowego!</title>
+    <title th:text="#{messages.index.title}">Your internet provider site!</title>
 </head>
-<body background="/css/server.jpeg">
+<body>
 <div class="row" layout:fragment="content">
     <div class="col s12">
-        <h2 class="black-text center"><b>Witaj w KLIMANET!</b></h2>
+        <h2 class="black-text center"><b th:text="#{messages.index.welcome}">Welcome at RumCom!</b></h2>
     </div>
 </div>
 

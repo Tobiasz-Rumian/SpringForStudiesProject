@@ -1,59 +1,64 @@
 <!DOCTYPE html>
 <html lang="pl" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout/default"
-      xmlns:th="http://www.w3.org/1999/xhtml">
+      xmlns:th="http://www.thymeleaf.org">
 <head lang="pl">
-    <meta charset="UTF-8"></meta>
-    <title>Panel zarządzania użytkownikami</title>
+    <meta charset="UTF-8"/>
+    <title th:text="#{messages.admin.users.title}">Users configuration panel</title>
 </head>
 <body>
 <div class="row" layout:fragment="content">
     <div class="col s12">
-        <h2 class="red-text text-darken-3 center"><b>Panel zarządzania użytkownikami</b></h2>
+        <h2 class="red-text text-darken-3 center"><b th:text="#{messages.admin.users.mainHeader}">Users configuration
+            panel</b></h2>
     </div>
 
     <div class="col s4 offset-s4 blue lighten-4">
-        <p>Lista użytkowników systemu. Na czarwono wyróżnieni są użytkownicy zalegający z zapłatą.</p>
+        <p th:text="#{messages.admin.users.header}">Users list. On red are users after pay date.</p>
 
         <ul class="collapsible" data-collapsible="accordion">
             <li th:each="user : ${users}">
-                <div th:if="${user.haveDebt == true}" class="collapsible-header red lighten-3" th:text="'Użytkownik: '+${user.firstName}+' '+${user.lastName}">Użytkownik #1</div>
-                <div th:if="${user.haveDebt == false}" class="collapsible-header" th:text="'Użytkownik: '+${user.firstName}+' '+${user.lastName}">Użytkownik #1</div>
+                <div th:if="${user.haveDebt == true}" class="collapsible-header red lighten-3"
+                     th:text="'Użytkownik: '+${user.firstName}+' '+${user.lastName}">User #1
+                </div>
+                <div th:if="${user.haveDebt == false}" class="collapsible-header"
+                     th:text="'Użytkownik: '+${user.firstName}+' '+${user.lastName}">User #1
+                </div>
                 <div class="collapsible-body">
                     <div class="row">
                         <div class="col s6 align-left">
-                            <p><b>Nazwa usługi:</b></p>
+                            <p><b th:text="#{messages.admin.users.label.header}">Offer name:</b></p>
                         </div>
                         <div class="col s6 left-align">
                             <p th:text="${user.offerName}"></p>
                         </div>
                         <div class="col s6 left-align">
                             <p>
-                                <b>Imię:</b>
+                                <b th:text="#{messages.common.label.name}">Name:</b>
                             </p>
                         </div>
                         <div class="col s6 left-align">
-                            <p th:text="${user.firstName}">  IMIĘ </p>
+                            <p th:text="${user.firstName}"> name </p>
                         </div>
                         <div class=" col s6 align-left">
                             <p>
-                                <b>Nazwisko:</b>
+                                <b th:text="#{messages.common.label.surname}">Surname:</b>
                             </p>
                         </div>
                         <div class="col s6 left-align">
-                            <p th:text="${user.lastName}">  Nazwisko</p>
+                            <p th:text="${user.lastName}"> surname</p>
                         </div>
                         <div class=" col s6 align-left">
                             <p>
-                                <b>Numer telefonu:</b>
+                                <b th:text="#{messages.common.label.phoneNumber}">Phone number:</b>
                             </p>
                         </div>
                         <div class="col s6 left-align">
-                            <p th:text="${user.phoneNumber}"> NUMER</p>
+                            <p th:text="${user.phoneNumber}"> number</p>
                         </div>
                         <div class=" col s6 align-left">
                             <p>
-                                <b>Adres E-Mail:</b>
+                                <b th:text="#{messages.common.label.email}">E-Mail:</b>
                             </p>
                         </div>
                         <div class="col s6 left-align">
@@ -61,17 +66,17 @@
                         </div>
                         <div class=" col s6 align-left">
                             <p>
-                                <b>Adres:</b>
+                                <b th:text="#{messages.admin.offers.title}">Address:</b>
                             </p>
                         </div>
                         <div class="col s6 left-align">
                             <p th:text="${user.address}">
-                                Adres
+                                address
                             </p>
                         </div>
                         <div class="col s6 align-left">
                             <p>
-                                <b>PESEL:</b>
+                                <b th:text="#{messages.common.label.pesel}">PESEL:</b>
                             </p>
                         </div>
                         <div class="col s6 left-align">

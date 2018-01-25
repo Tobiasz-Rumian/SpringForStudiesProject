@@ -1,22 +1,25 @@
 <!DOCTYPE html>
-<html   lang="pl" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorator="layout/default"
-        xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      lang="pl"
+      layout:decorator="layout/default">
 <head lang="pl">
     <meta charset="UTF-8"/>
-    <title>Panel zarządzania ofertami</title>
+    <title th:text="#{messages.admin.offers.title}">Offers configuration panel</title>
 </head>
 <body>
 <div class="row" layout:fragment="content">
     <div class="col s12">
-        <h2 class="red-text text-darken-3 center"><b>Panel zarządzania ofertami</b></h2>
+        <h2 class="red-text text-darken-3 center"><b th:text="#{messages.admin.offers.mainHeader}">Offers configuration
+            panel</b></h2>
     </div>
 
     <div class="col s4 offset-s4 blue lighten-4">
         <div class="row"></div>
         <div class="row valign-wrapper">
             <div class="center">
-                <a class="waves-effect waves-light btn-large center-align"  th:href="@{/admin_addOffer/{id}(id=${user.id})}">Dodaj ofertę</a>
+                <a class="waves-effect waves-light btn-large center-align"
+                   th:href="@{/admin_addOffer/{id}(id=${user.id})}" th:text="#{messages.admin.offers.button.addOffer}">Add
+                    offer</a>
             </div>
         </div>
         <ul class="collapsible" data-collapsible="accordion">
@@ -32,34 +35,39 @@
                         <table class="left">
                             <thead>
                             <tr>
-                                <th>Prędkość pobierania</th>
-                                <th>Prędkość wysyłania</th>
-                                <th>Cena</th>
-                                <th>Liczba użytkowników</th>
+                                <th th:text="#{messages.common.label.downloadSpeed}">Download speed [Mb/s]</th>
+                                <th th:text="#{messages.common.label.uploadSpeed}">Upload speed [Mb/s]</th>
+                                <th th:text="#{messages.common.label.price}">Price [zł/mc]</th>
+                                <th th:text="#{messages.admin.offers.label.usersCount}">Users count</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr>
-                                <td th:text="${offer.downloadSpeed}">Prędkość pobierania</td>
-                                <td th:text="${offer.uploadSpeed}">Prędkość wysyłania</td>
-                                <td th:text="${offer.price}">Cena</td>
-                                <td th:text="${offer.usersCount}">Liczba użytkowników</td>
+                                <td th:text="${offer.downloadSpeed}">Download speed</td>
+                                <td th:text="${offer.uploadSpeed}">Upload speed</td>
+                                <td th:text="${offer.price}">Price</td>
+                                <td th:text="${offer.usersCount}">Users count</td>
                             </tr>
                             </tbody>
                         </table>
                     </div>
-                    <div class="row" >
-                        <form class="col s6 blue lighten-4" th:action="@{/admin_deleteOffer/{id}/{offerId}(id=${user.id},offerId=${offer.id})}"
+                    <div class="row">
+                        <form class="col s6 blue lighten-4"
+                              th:action="@{/admin_deleteOffer/{id}/{offerId}(id=${user.id},offerId=${offer.id})}"
                               method="post" role="form">
                             <div class="center">
-                                    <button class="btn waves-effect waves-light red" type="submit" name="action">Usuń
-                                        <i class="material-icons right">clear</i>
-                                    </button>
+                                <button class="btn waves-effect waves-light red" type="submit" name="action"
+                                        th:text="#{messages.common.button.delete}">Delete
+                                    <i class="material-icons right">clear</i>
+                                </button>
                             </div>
                         </form>
-                        <form class="col s6 blue lighten-4" th:action="@{/admin_editOffer/{id}/{offerId}(id=${user.id},offerId=${offer.id})}" method="get" role="form">
+                        <form class="col s6 blue lighten-4"
+                              th:action="@{/admin_editOffer/{id}/{offerId}(id=${user.id},offerId=${offer.id})}"
+                              method="get" role="form">
                             <div class="center">
-                                <button class="waves-effect waves-light btn-large center-align" type="submit" name="action">Edytuj
+                                <button class="waves-effect waves-light btn-large center-align" type="submit"
+                                        name="action" th:text="#{messages.common.button.edit}">Edit
                                     <i class="material-icons right">send</i>
                                 </button>
                             </div>

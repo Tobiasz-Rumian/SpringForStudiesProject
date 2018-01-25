@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html lang="pl" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
       layout:decorator="layout/default">
 <head lang="pl">
     <meta charset="UTF-8"></meta>
-    <title>Powiadomiania</title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection"/>
+    <title th:text="#{messages.admin.notifications.title}">Notifications</title>
 </head>
 <body>
 <div class="row" layout:fragment="content">
     <div class="col s12">
-        <h2 class="red-text text-darken-3 center"><b>Powiadomienia</b></h2>
+        <h2 class="red-text text-darken-3 center"><b
+                th:text="#{messages.admin.notifications.mainHeader}">Notifications</b></h2>
     </div>
 
     <div class="col s4 offset-s4 blue lighten-4">
@@ -19,12 +18,12 @@
             <li th:each="notification : ${notifications}">
                 <div class="collapsible-header"
                      th:text="${notification.user.firstName}+' '+${notification.user.lastName}+${notification.information}+${notification.offer}">
-                    Użytkownik X wybrał ofertę Y
+                    Notification text
                 </div>
                 <div class="collapsible-body">
                     <div class="row">
                         <div class="col s6 align-left">
-                            <p>Adres zamieszkania klienta:</p>
+                            <p th:text="#{messages.admin.notifications.label.address}">User address:</p>
                         </div>
                         <div class="col s6 align-right">
                             <p th:text="${notification.user.address}">ul. Szybka 1A/3 Wrocław 47-221</p>
@@ -34,17 +33,17 @@
                         <table class="left">
                             <thead>
                             <tr>
-                                <th>Imię</th>
-                                <th>Nazwisko</th>
-                                <th>Numer Telefonu</th>
-                                <th>Adres E-mail</th>
-                                <th>PESEL</th>
+                                <th th:text="#{messages.common.label.name}">Name</th>
+                                <th th:text="#{messages.common.label.surname}">Surname</th>
+                                <th th:text="#{messages.common.label.phoneNumber}">Phone number</th>
+                                <th th:text="#{messages.common.label.email}">E-mail</th>
+                                <th th:text="#{messages.common.label.pesel}">PESEL</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr>
-                                <td th:text="${notification.user.firstName}">Marcin</td>
-                                <td th:text="${notification.user.lastName}">Klima</td>
+                                <td th:text="${notification.user.firstName}">name</td>
+                                <td th:text="${notification.user.lastName}">surname</td>
                                 <td th:text="${notification.user.phoneNumber}">586147584</td>
                                 <td th:text="${notification.user.email}">kowalski34@gmail.com</td>
                                 <td th:text="${notification.user.pesel}">11223344556</td>
@@ -55,7 +54,8 @@
                     <div class="row">
                         <form class="row">
                             <div class="center">
-                                <button class="btn waves-effect waves-light" type="submit" name="action">Zatwierdź
+                                <button class="btn waves-effect waves-light" type="submit" name="action"
+                                        th:text="#{messages.common.button.confirm}">Confirm
                                     <i class="material-icons right">send</i>
                                 </button>
                             </div>
