@@ -6,10 +6,7 @@ I started thinking maybe this will be a good example of my knowledge and coding 
 I'm working on it to make it perfect. I know it isn't, but it's better than looking at my other projects that I've done 
 sometimes in one day. I know that they are terrible ;)
 
-## Things done:
-
-
-## [Things to do](https://trello.com/b/jxmj7QOG/projekt-firma-telekomunikacyjna):
+## [Kanban](https://trello.com/b/jxmj7QOG/projekt-firma-telekomunikacyjna):
 
 ## Used technologies, frameworks etc.
 
