@@ -22,45 +22,45 @@
             <!--Nav for admin-->
             <ul th:if="${user.role == T(com.rumian.projekt1.user.enums.Role).ADMIN}" id="nav-mobile"
                 class="left hide-on-med-and-down blue-text text-darken-2">
-                <li><a th:href="@{/admin_console/{id}(id=${user.id})}" class="grey-text text-darken-1">Strona główna</a></li>
+                <li><a th:href="@{/admin_console/{id}(id=${user.id})}" class="grey-text text-darken-1" th:text="#{messages.navbar.mainPage}">Main Page</a></li>
                 <li th:if="${unreadNotificationNumber ==0}"><a th:href="@{/admin_notifications/{id}(id=${user.id})}"
-                                                               class="grey-text text-darken-1">Powiadomienia</a></li>
+                                                               class="grey-text text-darken-1" th:text="#{messages.navbar.notifications}">Notifications</a></li>
                 <li th:if="${unreadNotificationNumber &gt; 0}"><a th:href="@{/admin_notifications/{id}(id=${user.id})}"
-                                                                  class="grey-text text-darken-1 red lighten-3">Powiadomienia</a></li>
-                <li><a th:href="@{/admin_offers/{id}(id=${user.id})}" class="grey-text text-darken-1">Panel zarządzania ofertami</a></li>
-                <li><a th:href="@{/admin_users/{id}(id=${user.id})}" class="grey-text text-darken-1">Panel zarządzania kontami użytkowników</a></li>
+                                                                  class="grey-text text-darken-1 red lighten-3" th:text="#{messages.navbar.notifications}">Notifications</a></li>
+                <li><a th:href="@{/admin_offers/{id}(id=${user.id})}" class="grey-text text-darken-1" th:text="#{messages.navbar.offersPanel}" >Offer management panel</a></li>
+                <li><a th:href="@{/admin_users/{id}(id=${user.id})}" class="grey-text text-darken-1" th:text="#{messages.navbar.usersPanel}">User management panel</a></li>
                 <li><a th:href="@{/user_account/{id}(id=${user.id})}"
-                       class="grey-text text-darken-1">Ustawienia konta</a></li>
+                       class="grey-text text-darken-1" th:text="#{messages.navbar.settings}">Settings</a></li>
                 <li>
                     <form class="grey-text text-darken-1" th:action="@{/logout}" method="post" role="form">
                             <div class="center"><button class="grey-text text-darken-1 btn-flat" type="submit"
-                                                        name="action">Wyloguj</button></div>
+                                                        name="action" th:text="#{messages.navbar.logout}">Logout</button></div>
                     </form>
                 </li>
             </ul>
             <!--Nav for unlogged-->
             <ul th:if="${user.role == T(com.rumian.projekt1.user.enums.Role).UNLOGGED}" id="nav-mobile"
                 class="left hide-on-med-and-down blue-text text-darken-2">
-                <li><a href="/" class="grey-text text-darken-1">Strona główna</a></li>
-                <li><a href="/login" class="grey-text text-darken-1">Zaloguj</a></li>
-                <li><a href="/register" class="grey-text text-darken-1">Zarejestruj</a></li>
+                <li><a href="/" class="grey-text text-darken-1" th:text="#{messages.navbar.mainPage}">Main Page</a></li>
+                <li><a href="/login" class="grey-text text-darken-1" th:text="#{messages.navbar.login}" >Login</a></li>
+                <li><a href="/register" class="grey-text text-darken-1" th:text="#{messages.navbar.register}" >Register</a></li>
             </ul>
             <!--Nav for user-->
             <ul th:if="${user.role == T(com.rumian.projekt1.user.enums.Role).USER}" id="nav-mobile"
                 class="left hide-on-med-and-down blue-text text-darken-2">
                  <li><a th:href="@{/user_main/{id}(id=${user.id})}"
-                        class="grey-text text-darken-1">Strona główna</a></li>
+                        class="grey-text text-darken-1" th:text="#{messages.navbar.mainPage}">Main Page</a></li>
                  <li><a th:href="@{/user_offers/{id}(id=${user.id})}"
-                        class="grey-text text-darken-1">Przeglądaj oferty</a></li>
+                        class="grey-text text-darken-1" th:text="#{messages.navbar.offers}">Offers</a></li>
                  <li><a th:href="@{/user_wallet/{id}(id=${user.id})}"
-                        class="grey-text text-darken-1">Doładuj portfel</a></li>
-                 <li><a th:href="@{/user_invoice/{id}(id=${user.id})}" class="grey-text text-darken-1">Przeglądaj faktury</a></li>
+                        class="grey-text text-darken-1" th:text="#{messages.navbar.payIn}">Pay in to wallet</a></li>
+                 <li><a th:href="@{/user_invoice/{id}(id=${user.id})}" class="grey-text text-darken-1" th:text="#{messages.navbar.invoices}">Invoices</a></li>
                  <li><a th:href="@{/user_account/{id}(id=${user.id})}"
-                        class="grey-text text-darken-1">Ustawienia konta</a></li>
+                        class="grey-text text-darken-1" th:text="#{messages.navbar.settings}">Settings</a></li>
                  <li>
                     <form class="grey-text text-darken-1" th:action="@{/logout}" method="post" role="form">
                             <div class="center"><button class="grey-text text-darken-1 btn-flat" type="submit"
-                                                        name="action">Wyloguj</button></div>
+                                                        name="action" th:text="#{messages.navbar.logout}">Logout</button></div>
                     </form>
                 </li>
             </ul>

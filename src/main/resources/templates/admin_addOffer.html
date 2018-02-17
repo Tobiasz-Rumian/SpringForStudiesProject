@@ -35,7 +35,7 @@
                     </div>
                     <!--downSpeed-->
                     <div class="input-field col s6">
-                        <label for="downloadSpeed" th:text="#{messages.admin.addOffer.label.downloadSpeed}">Download
+                        <label for="downloadSpeed" th:text="#{messages.common.label.downloadSpeed}">Download
                             speed [Mb/s]</label>
                         <input id="downloadSpeed" type="text" th:field="*{downloadSpeed}" th:value="${downloadSpeed}" class="validate"/>
                         <div th:if="${#fields.hasErrors('downloadSpeed')}" th:errors="*{downloadSpeed}"
@@ -43,7 +43,7 @@
                     </div>
                     <!--uploadSpeed-->
                     <div class="input-field col s6">
-                        <label for="uploadSpeed" th:text="#{messages.admin.addOffer.label.uploadSpeed}">Upload speed
+                        <label for="uploadSpeed" th:text="#{messages.common.label.uploadSpeed}">Upload speed
                             [Mb/s]</label>
                         <input id="uploadSpeed" type="text" th:field="*{uploadSpeed}" th:value="${uploadSpeed}" class="validate"/>
                         <div th:if="${#fields.hasErrors('uploadSpeed')}" th:errors="*{uploadSpeed}"
@@ -51,7 +51,7 @@
                     </div>
                     <!--price-->
                     <div class="input-field col s6">
-                        <label for="price" th:text="#{messages.admin.addOffer.label.price}">Price [zł/mc]</label>
+                        <label for="price" th:text="#{messages.common.label.price}">Price [zł/mc]</label>
                         <input id="price" type="text" th:field="*{price}" th:value="${price}" class="validate"/>
                         <div th:if="${#fields.hasErrors('price')}" th:errors="*{price}"
                              class="validation-message alert alert-danger" role="alert"></div>

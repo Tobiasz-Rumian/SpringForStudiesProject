@@ -1,31 +1,31 @@
 <!DOCTYPE html>
 <html lang="pl" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout/default"
-      xmlns:th="http://www.w3.org/1999/xhtml">
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Oferty</title>
+    <title th:text="#{messages.user.offers.title}">Offers</title>
 </head>
 <body>
 <div class="row" layout:fragment="content">
     <div class="col s12">
-        <h2 class="black-text center"><b>Przeglądaj oferty</b></h2>
+        <h2 class="black-text center"><b th:text="#{messages.user.offers.mainHeader}">Search trough offers</b></h2>
     </div>
 
     <div class="col s4 offset-s4 blue lighten-4">
 
         <ul th:if="${user.offer!=null}" class="collapsible" data-collapsible="accordion">
-            <p>Poniżej widnieją Państwa aktualne usługi.</p>
+            <p th:text="#{messages.user.offers.label.currentlyUsedOffers}">Your current offers.</p>
             <li>
-                <div class="collapsible-header" th:text="${user.offer.name}">OFERTA #1</div>
+                <div class="collapsible-header" th:text="${user.offer.name}">OFFER #1</div>
                 <div class="collapsible-body">
-                    <span th:text="${user.offer.description}">OPIS OFERTY</span>
+                    <span th:text="${user.offer.description}">Offer description</span>
                     <div class="row">
                         <form class="col s6 blue lighten-4" th:action="@{/user_offers_delete/{id}/(id=${user.id})}"
                               method="post" role="form">
                             <div class="center">
                                 <button class="waves-effect waves-light btn-large center-align" type="submit"
-                                        name="action">Zrezygnuj
+                                        name="action" th:text="#{messages.user.offers.label.resign}">Resign
                                     <i class="material-icons right">send</i>
                                 </button>
                             </div>
@@ -35,36 +35,31 @@
             </li>
         </ul>
 
-        <p>Poniżej przedstawiamy naszą ofertę. Aby zobaczyć szczegły oferty proszę kliknąć interesujące Państwa pole z nazwą usługi.
-        W celu wybrania oferty kliknij przecisk ZAPISZ widoczny w polu ukazywanym po wybraniu usługi.
-            Nasz konsultant skontaktuje się z Państwem w celu ustalenia terminu montażu internetu przez naszego technika
-            oraz podpisania umowy.</p>
+        <p th:text="#{messages.user.offers.label.offerInfo}">Below we present our offers. To see the details of the offer, please click on the field with the name of the offer.
+            In order to select an offer, click the SAVE button visible in the field displayed after selecting the service.
+            Our consultant will contact you in order to determine the date of the internet installation by our technician
+            and signing the contract.
+        </p>
 
         <ul class="collapsible" data-collapsible="accordion">
             <li th:each="offer : ${offers}">
-                <div class="collapsible-header" th:text="${offer.name}">OFERTA #1</div>
+                <div class="collapsible-header" th:text="${offer.name}">OFFER #1</div>
                 <div class="collapsible-body">
-                    <div class="row" th:text="${offer.description}">Lorem ipsum dolor sit amet, consectetur adipiscing
-                        elit.
-                    Nam nec aliquam ipsum, vitae faucibus odio. Mauris euismod mi ligula, non gravida lectus efficitur id.
-                    Sed sed dapibus mi, vel volutpat lorem. Proin vel tempor metus.
-                    Ut arcu nisi, vehicula sit amet tellus nec, lobortis elementum ipsum.
-                    Nullam eu pretium ligula. Nunc eu luctus lorem, ut fringilla odio.
-                    </div>
+                    <div class="row" th:text="${offer.description}">Offer description</div>
                     <div class="row">
                         <table class="centered">
                             <thead>
                             <tr>
-                                <th>Prędkość pobierania</th>
-                                <th>Prędkość wysyłania</th>
-                                <th>Cena</th>
+                                <th th:text="#{messages.common.label.downloadSpeed}">Download speed [Mb/s]</th>
+                                <th th:text="#{messages.common.label.uploadSpeed}">Upload speed [Mb/s]</th>
+                                <th th:text="#{messages.common.label.price}">Price [zł/mc]</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr>
-                                <td th:text="${offer.downloadSpeed}">PRĘDKOŚĆ POBIERNAIA</td>
-                                <td th:text="${offer.uploadSpeed}">PRĘDKOŚĆ WYSYŁANIA</td>
-                                <td th:text="${offer.price}">CENA</td>
+                                <td th:text="${offer.downloadSpeed}">Download speed [Mb/s]</td>
+                                <td th:text="${offer.uploadSpeed}">Upload speed [Mb/s]</td>
+                                <td th:text="${offer.price}">Price [zł/mc]</td>
                             </tr>
                             </tbody>
                         </table>
@@ -75,7 +70,7 @@
                               method="post" role="form">
                             <div class="center">
                                 <button class="waves-effect waves-light btn-large center-align" type="submit"
-                                        name="action">Wybierz!
+                                        name="action" th:text="#{messages.user.offers.button.choose}">Choose
                                     <i class="material-icons right">send</i>
                                 </button>
                             </div>

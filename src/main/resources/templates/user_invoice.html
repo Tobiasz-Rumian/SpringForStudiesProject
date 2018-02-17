@@ -1,36 +1,36 @@
 <!DOCTYPE html>
 <html lang="pl" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
       layout:decorator="layout/default">
 <head>
     <meta charset="UTF-8">
-    <title>Faktury</title>
+    <title th:text="#{messages.user.invoices.title}">Invoices</title>
 </head>
 <body>
 <div class="row" layout:fragment="content">
     <div class="col s12">
-        <h2 class="black-text center"><b>Faktury</b></h2>
+        <h2 class="black-text center"><b th:text="#{messages.user.invoices.mainHeader}">Invoices</b></h2>
     </div>
 
     <div class="col s4 offset-s4 blue lighten-4">
         <table>
             <thead>
             <tr>
-                <th>Numer faktury</th>
-                <th>Cena</th>
-                <th>Termin zapłaty</th>
-                <th>Data wystawienia</th>
-                <th>Data wpłaty</th>
+                <th th:text="#{messages.user.invoices.label.invoiceNumber}">Invoice number</th>
+                <th th:text="#{messages.common.label.price}">Price</th>
+                <th th:text="#{messages.user.invoices.label.payDate}">Pay date</th>
+                <th th:text="#{messages.user.invoices.label.issueDate}">Issue date</th>
+                <th th:text="#{messages.user.invoices.label.paymentDate}">Payment date</th>
             </tr>
             </thead>
 
             <tbody>
             <tr th:each="invoice : ${invoices}">
-                <td th:text="${invoice.invoiceNumber}">NUMER FAKTURY</td>
-                <td th:text="${invoice.price}">CENA</td>
-                <td th:text="${invoice.paymentDeadlineAsText}">TERMIN ZAPŁATY</td>
-                <td th:text="${invoice.issueDateAsText}">DATA WYSTAWIENIA</td>
-                <td th:text="${invoice.paymentDateAsText}">DATA WPŁATY</td>
+                <td th:text="${invoice.invoiceNumber}">Invoice number</td>
+                <td th:text="${invoice.price}">Price</td>
+                <td th:text="${invoice.paymentDeadlineAsText}">Pay date</td>
+                <td th:text="${invoice.issueDateAsText}">Issue date</td>
+                <td th:text="${invoice.paymentDateAsText}">Payment date</td>
             </tr>
             </tbody>
         </table>
